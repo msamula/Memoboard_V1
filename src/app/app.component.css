@@ -45,4 +45,6 @@ p{
   height: var(--height);
   max-width: 100%;
   border: solid 1px #ccc;
+  border-radius: 4px;
+  background-color: white;
 }

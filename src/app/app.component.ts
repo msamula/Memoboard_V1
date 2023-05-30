@@ -14,10 +14,9 @@ interface Memo{
 })
 
 export class AppComponent {
-  memos: Memo[];
-
   username: string;
   message: string;
+  memos: Memo[];
 
   constructor(private modalService: NgbModal) {
 
@@ -28,7 +27,6 @@ export class AppComponent {
 
     this.username = "";
     this.message = "";
-
     this.memos = [
       {
         id: 1,
@@ -71,11 +69,9 @@ export class AppComponent {
         message: 'Wallah billa'
       }
     ];
-
   }
 
   createMemo() {
-
     if(this.username == "" || this.message == "")
     {
        return;
@@ -87,8 +83,8 @@ export class AppComponent {
       message: this.message
       };
 
-      this.memos.push(newMemo);
-      this.message = "";
+    this.memos.push(newMemo);
+    this.message = "";
   }
 
   //for bootstrap
