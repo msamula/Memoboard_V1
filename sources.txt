@@ -1,0 +1,10 @@
+drag drop
+https://material.angular.io/cdk/drag-drop/overview
+
+tutorial
+https://www.youtube.com/watch?v=aOB2nmuICJo&list=PL82C6-O4XrHdf0LMDVl1Y-4_BFbNmdrGc&index=6&ab_channel=TeddySmith
+
+bootstrap
+https://www.freecodecamp.org/news/how-to-add-bootstrap-css-framework-to-an-angular-application/
+https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
+Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser
