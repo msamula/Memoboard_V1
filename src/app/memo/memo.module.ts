@@ -13,7 +13,7 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
 
   imports: [
     CommonModule,
-    CdkDrag
+    CdkDrag             //for memo-list.component.html file -> drag and drop
   ],
 
   //add exports with MemoComponent when creating this module

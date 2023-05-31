@@ -13,8 +13,14 @@ import {MemoModule} from "./memo/memo.module";
   ],
   imports: [
     BrowserModule,
+
+    //enables two-way-binding by angular
     FormsModule,
+
+    //bootstrap
     NgbModule,
+
+    //import the MemoModule
     MemoModule
   ],
   providers: [],

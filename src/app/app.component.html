@@ -1,10 +1,10 @@
 <div class="container text-center" style="margin-top: 10px">
   <div class="row">
     <div class="col input-group flex-nowrap">
-      <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username">
-    </div>
+      <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username">    <!--[(ngModel)] -> two-way-binding from angular-->
+    </div>                                                                                      <!--[(ngModel)] -> banana-binding-->
     <div class="col input-group flex-nowrap">
-      <input type="text" class="form-control" placeholder="Message"  [(ngModel)]="message">
+      <input type="text" class="form-control" placeholder="Message"  [(ngModel)]="message">     <!--[(ngModel)] -> two-way-binding from angular-->
     </div>
     <div class="col">
       <button class="btn btn-success" (click)="CreateMemo()">Create memo</button>

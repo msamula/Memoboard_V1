@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {MemoModule} from "./memo/memo.module";
+import {MemoListComponent} from "./memo/memo-list/memo-list.component";
 
 @Component({
   selector: 'app-root',
