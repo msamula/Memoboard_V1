@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {MemoModule} from "./memo/memo.module";
 import {MemoListComponent} from "./memo/memo-list/memo-list.component";
 
 @Component({
@@ -30,6 +28,11 @@ export class AppComponent {
     if(!memoCreated)
     {
       window.alert("Something went wrong while creating a new memo. Check if the username and the message is filled.");
+    }
+
+    if(!memoCreated)
+    {
+      this.message = "";
     }
   }
 

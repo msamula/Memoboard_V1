@@ -89,6 +89,7 @@ import {GetWindowSize} from "../../helper/helperFunctions";
       return false;
     }
 
+    console.log(this.memos);
     return true;
   }
 }
