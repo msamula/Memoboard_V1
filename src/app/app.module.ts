@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
-import {CdkDrag} from "@angular/cdk/drag-drop";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MemoModule} from "./memo/memo.module";
 
@@ -15,7 +14,6 @@ import {MemoModule} from "./memo/memo.module";
   imports: [
     BrowserModule,
     FormsModule,
-    CdkDrag,
     NgbModule,
     MemoModule
   ],

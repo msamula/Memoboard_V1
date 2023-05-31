@@ -1,4 +1,4 @@
-<app-memo></app-memo>
+<app-memo-detail></app-memo-detail>
 
 <div class="container text-center" style="margin-top: 10px">
   <div class="row">
@@ -9,28 +9,11 @@
       <input type="text" class="form-control" placeholder="Message"  [(ngModel)]="message">
     </div>
     <div class="col">
-      <button class="btn btn-success" (click)="createMemo()">Create memo</button>
+      <button class="btn btn-success" (click)="CreateMemo()">Create memo</button>
     </div>
   </div>
 </div>
 
-<div class="container text-center boundary" style="margin-top: 1%;">
-  <div class="row row-cols-6">
-
-    <div *ngFor="let memo of memos; let i = index">
-
-      <div class="card border-dark mb-3 memoBox" cdkDragBoundary=".boundary" cdkDrag>
-        <div class="card-header">
-          {{memo.user}}
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{memo.message}}</p>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
+<app-memo-list></app-memo-list>
 
 

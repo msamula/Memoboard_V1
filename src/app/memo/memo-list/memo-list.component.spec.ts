@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MemoComponent } from './memo.component';
+import { MemoListComponent } from './memo-list.component';
 
-describe('MemoComponent', () => {
-  let component: MemoComponent;
-  let fixture: ComponentFixture<MemoComponent>;
+describe('MemoListComponent', () => {
+  let component: MemoListComponent;
+  let fixture: ComponentFixture<MemoListComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [MemoComponent]
+      declarations: [MemoListComponent]
     });
-    fixture = TestBed.createComponent(MemoComponent);
+    fixture = TestBed.createComponent(MemoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
