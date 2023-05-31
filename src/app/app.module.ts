@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import { AppComponent } from './app.component';
 import {CdkDrag} from "@angular/cdk/drag-drop";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {GridModule} from "./grid/grid.module";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
     BrowserModule,
     FormsModule,
     CdkDrag,
-    NgbModule
+    NgbModule,
+    GridModule
   ],
   providers: [],
   bootstrap: [AppComponent]
