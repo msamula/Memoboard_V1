@@ -23,7 +23,14 @@ export class AppComponent {
 
   CreateMemo()
   {
-    console.log(this.username + ' ' + this.message);
+    let memo = new MemoListComponent();
+
+    let memoCreated = memo.createMemo(this.username, this.message);
+
+    if(!memoCreated)
+    {
+      window.alert("Something went wrong while creating a new memo. Check if the username and the message is filled.");
+    }
   }
 
   //for bootstrap???
