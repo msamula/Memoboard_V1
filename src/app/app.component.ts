@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Memo} from "./models/memo";
 import {GetWindowSize} from "./helper/helperFunctions";
 
@@ -8,7 +8,8 @@ import {GetWindowSize} from "./helper/helperFunctions";
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+// implements is a form of inheritance
+export class AppComponent implements OnInit{
   username: string;
   message: string;
 
@@ -16,8 +17,6 @@ export class AppComponent {
   memos: Memo[];
 
   constructor() {
-
-    GetWindowSize();
 
     this.username = "";
     this.message = "";
@@ -64,6 +63,12 @@ export class AppComponent {
         message: 'Wallah billa'
       }
     ];
+  }
+
+  // before the actual page load -> lifecycle method of angular
+  // after the constructor
+  ngOnInit(): void{
+      GetWindowSize();
   }
 
   CreateMemo() {

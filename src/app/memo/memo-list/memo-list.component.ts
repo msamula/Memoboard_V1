@@ -1,9 +1,8 @@
 //standard imports
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 //user imports
 import {Memo} from "../../models/memo";
-import {GetWindowSize} from "../../helper/helperFunctions";
 
 //Decorator
 @Component({
@@ -12,19 +11,10 @@ import {GetWindowSize} from "../../helper/helperFunctions";
   styleUrls: ['./memo-list.component.css']      //list of css of the component
 })
 
-// implements is a form of inheritance
-  export class MemoListComponent implements OnInit{
 
-  //input -> pass data down
-  @Input()
-  inputMemo!: Memo;
-
-  constructor() {
+export class MemoListComponent
+  {
+    //input -> pass data down
+    @Input()
+    inputMemo!: Memo;
   }
-
-  // before the actual page load -> lifecycle method of angular
-  // after the constructor
-  ngOnInit(): void{
-
-  }
-}
