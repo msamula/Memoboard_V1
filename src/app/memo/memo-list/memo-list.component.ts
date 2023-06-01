@@ -20,10 +20,16 @@ export class MemoListComponent
 
     //output -> pass data up with events
     @Output()
-    close: EventEmitter<any> = new EventEmitter();
+    remove: EventEmitter<any> = new EventEmitter();
+    @Output()
+    change: EventEmitter<any> = new EventEmitter();
 
     //emit -> fire up the event
-    onClose() {
-        this.close.emit(this.inputMemo);
+    onRemove() {
+        this.remove.emit(this.inputMemo);
+    }
+
+    onChange() {
+        this.change.emit(this.inputMemo);
     }
   }
