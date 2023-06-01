@@ -1,7 +1,11 @@
+//standard imports
 import {Component, OnInit} from '@angular/core';
+
+//user imports
 import {Memo} from "../../models/memo";
 import {GetWindowSize} from "../../helper/helperFunctions";
 
+//Decorator
 @Component({
   selector: 'app-memo-list',                    //name of the tag in the app.component.html file
   templateUrl: './memo-list.component.html',    //html of the component
@@ -12,7 +16,6 @@ import {GetWindowSize} from "../../helper/helperFunctions";
   export class MemoListComponent implements OnInit{
 
   //smart component
-  //
   memos: Memo[];
 
   constructor() {
@@ -62,8 +65,8 @@ import {GetWindowSize} from "../../helper/helperFunctions";
     ];
   }
 
-  // before the actual page load -> lifecycle method
-  // but after the constructor
+  // before the actual page load -> lifecycle method of angular
+  // after the constructor
   ngOnInit(): void{
 
   }
