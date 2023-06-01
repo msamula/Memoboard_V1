@@ -1,20 +1,12 @@
 <!--various classes from bootstrap-->
-<!---->
-<div class="container text-center boundary" style="margin-top: 1%;">
-  <div class="row row-cols-6">
 
-    <div *ngFor="let memo of memos; let i = index">                                       <!--angular for loop-->
-
-      <div class="card border-dark mb-3 memoBox" cdkDragBoundary=".boundary" cdkDrag>     <!--.boundary in css-->
-        <div class="card-header">
-          {{memo.user}}
-        </div>
-        <div class="card-body">
-          <p class="card-text">{{memo.message}}</p>
-        </div>
-      </div>
-
-    </div>
-
+<div class="card border-dark mb-3 memoBox" cdkDragBoundary=".boundary" cdkDrag>     <!--.boundary in css-->
+  <div class="card-header">
+    {{inputMemo.user}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{inputMemo.message}}</p>
   </div>
 </div>
+
+

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {MemoListComponent} from "./memo/memo-list/memo-list.component";
+import {Memo} from "./models/memo";
+import {GetWindowSize} from "./helper/helperFunctions";
 
 @Component({
   selector: 'app-root',
@@ -11,33 +12,89 @@ export class AppComponent {
   username: string;
   message: string;
 
-  //constructor for bootstrap???
-  //constructor(private modalService: NgbModal) {
+  //smart component
+  memos: Memo[];
 
   constructor() {
+
+    GetWindowSize();
+
     this.username = "";
     this.message = "";
+
+    this.memos = [
+      {
+        id: 1,
+        user: 'Alexander',
+        message: 'Meine NaviApp ist voll geil digga!'
+      },
+      {
+        id: 2,
+        user: 'Michael',
+        message: 'Was geht ab?'
+      },
+      {
+        id: 3,
+        user: 'Poorja',
+        message: 'Brille?'
+      },
+      {
+        id: 4,
+        user: 'Gökhan',
+        message: 'Autokorso wallah billa'
+      },
+      {
+        id: 5,
+        user: 'Alexander',
+        message: 'Hilfeeeee!'
+      },
+      {
+        id: 6,
+        user: 'Michael',
+        message: 'ay ay ay?'
+      },
+      {
+        id: 7,
+        user: 'Poorja',
+        message: 'Fielmann?'
+      },
+      {
+        id: 8,
+        user: 'Gökhan',
+        message: 'Wallah billa'
+      }
+    ];
   }
 
-  CreateMemo()
-  {
-    let memo = new MemoListComponent();
+  CreateMemo() {
+      if(this.username == "")
+      {
+        window.alert('Please enter a username.');
+        return;
+      }
 
-    let memoCreated = memo.createMemo(this.username, this.message);
+      if(this.message == "")
+      {
+        window.alert('Please enter a message.');
+        return;
+      }
 
-    if(!memoCreated)
-    {
-      window.alert("Something went wrong while creating a new memo. Check if the username and the message is filled.");
-    }
+      try
+      {
+        let newMemo: Memo = {
+          id: this.memos.length + 1,
+          user: this.username,
+          message: this.message
+        };
 
-    if(!memoCreated)
-    {
-      this.message = "";
-    }
+        this.memos.push(newMemo);
+        this.message = "";
+      }
+      catch
+      {
+        window.alert('Something went wrong while creating a new memo.');
+      }
+
+      return true;
   }
-
-  //for bootstrap???
-  //public open(modal: any): void {
-  //  this.modalService.open(modal);
-  //}
 }

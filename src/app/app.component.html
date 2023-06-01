@@ -12,6 +12,8 @@
   </div>
 </div>
 
-<app-memo-list></app-memo-list>                                                                 <!--import from the MemoModule the component memo-list-->
-
-
+<div class="container text-center boundary" style="margin-top: 1%;">
+  <div class="row row-cols-6">
+      <app-memo-list *ngFor="let memo of memos;" [inputMemo]= "memo"></app-memo-list>
+  </div>
+</div>
