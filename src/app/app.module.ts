@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MemoModule} from "./memo/memo.module";
 import {MemoService} from "./services/memo.service";
+import {HttpMemoService} from "./services/http-memo.service";
+import {HttpClientModule} from "@angular/common/http";
+
 
 
 @NgModule({
@@ -22,11 +25,15 @@ import {MemoService} from "./services/memo.service";
     NgbModule,
 
     //import the MemoModule
-    MemoModule
+    MemoModule,
+
+    //httpClient
+    HttpClientModule
   ],
   //add services here under providers
   providers: [
-    MemoService
+    MemoService,
+    HttpMemoService
   ],
   bootstrap: [AppComponent]
 })

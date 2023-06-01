@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Memo} from "./models/memo";
 import {GetWindowSize} from "./helper/helperFunctions";
 import {MemoService} from "./services/memo.service";
+import {HttpMemoService} from "./services/http-memo.service";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit{
   memos!: Memo[];
 
   //DI for MemoService
-  constructor(private memoService: MemoService) {
+  constructor(private memoService: MemoService, private httpMemoService: HttpMemoService) {
 
     this.username = "";
     this.message = "";
@@ -30,6 +31,13 @@ export class AppComponent implements OnInit{
   ngOnInit(): void{
       GetWindowSize();
       this.memos = this.memoService.GetMemos();
+
+    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+
+      for (let i = 0; i < data.length; i++) {
+        this.memos.push(data[i]);
+      }
+    });
   }
 
   CreateMemo() {
