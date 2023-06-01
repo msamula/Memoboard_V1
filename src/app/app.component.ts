@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Memo} from "./models/memo";
 import {GetWindowSize} from "./helper/helperFunctions";
+import {MemoService} from "./services/memo.service";
 
 @Component({
   selector: 'app-root',
@@ -14,61 +15,21 @@ export class AppComponent implements OnInit{
   message: string;
 
   //smart component
-  memos: Memo[];
+  // ! -> cant be null
+  memos!: Memo[];
 
-  constructor() {
+  //DI for MemoService
+  constructor(private memoService: MemoService) {
 
     this.username = "";
     this.message = "";
-
-    this.memos = [
-      {
-        id: 1,
-        user: 'Alexander',
-        message: 'Meine NaviApp ist voll geil digga!'
-      },
-      {
-        id: 2,
-        user: 'Michael',
-        message: 'Was geht ab?'
-      },
-      {
-        id: 3,
-        user: 'Poorja',
-        message: 'Brille?'
-      },
-      {
-        id: 4,
-        user: 'Gökhan',
-        message: 'Autokorso wallah billa'
-      },
-      {
-        id: 5,
-        user: 'Alexander',
-        message: 'Hilfeeeee!'
-      },
-      {
-        id: 6,
-        user: 'Michael',
-        message: 'ay ay ay?'
-      },
-      {
-        id: 7,
-        user: 'Poorja',
-        message: 'Fielmann?'
-      },
-      {
-        id: 8,
-        user: 'Gökhan',
-        message: 'Wallah billa'
-      }
-    ];
   }
 
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
       GetWindowSize();
+      this.memos = this.memoService.GetMemos();
   }
 
   CreateMemo() {

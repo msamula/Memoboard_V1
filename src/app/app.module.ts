@@ -5,6 +5,7 @@ import {FormsModule} from "@angular/forms";
 import { AppComponent } from './app.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MemoModule} from "./memo/memo.module";
+import {MemoService} from "./services/memo.service";
 
 
 @NgModule({
@@ -23,7 +24,10 @@ import {MemoModule} from "./memo/memo.module";
     //import the MemoModule
     MemoModule
   ],
-  providers: [],
+  //add services here under providers
+  providers: [
+    MemoService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
