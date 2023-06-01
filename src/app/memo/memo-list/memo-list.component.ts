@@ -1,5 +1,5 @@
 //standard imports
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 //user imports
 import {Memo} from "../../models/memo";
@@ -17,4 +17,13 @@ export class MemoListComponent
     //input -> pass data down
     @Input()
     inputMemo!: Memo;
+
+    //output -> pass data up with events
+    @Output()
+    close: EventEmitter<any> = new EventEmitter();
+
+    //emit -> fire up the event
+    onClose() {
+        this.close.emit(this.inputMemo);
+    }
   }

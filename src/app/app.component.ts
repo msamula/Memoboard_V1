@@ -102,4 +102,10 @@ export class AppComponent implements OnInit{
 
       return true;
   }
+
+  handleClose(event: Memo) {
+    this.memos = this.memos.filter((memo: Memo) =>{
+      return memo.id !== event.id;
+    })
+  }
 }
