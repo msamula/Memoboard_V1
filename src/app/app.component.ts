@@ -24,20 +24,25 @@ export class AppComponent implements OnInit{
 
     this.username = "";
     this.message = "";
+    this.memos = [];
   }
 
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
       GetWindowSize();
-      this.memos = this.memoService.GetMemos();
 
-    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+      //local data
+      //this.memos = this.memoService.GetMemos();
 
-      for (let i = 0; i < data.length; i++) {
-        this.memos.push(data[i]);
-      }
-    });
+      this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+
+        for (let i = 0; i < data.length; i++) {
+          data[i].id = this.memos.length + 1;
+          data[i].user = data[i].user['userName'];
+          this.memos.push(data[i]);
+        }
+      });
   }
 
   CreateMemo() {
