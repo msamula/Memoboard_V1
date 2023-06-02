@@ -30,19 +30,9 @@ export class AppComponent implements OnInit{
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
-      SetBoundarySize();
 
-      //local data
-      //this.memos = this.memoService.GetMemos();
-
-      //API data request
-      this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
-        for (let i = 0; i < data.length; i++) {
-          data[i].id = this.memos.length + 1;
-          data[i].user = data[i].user['userName'];
-          this.memos.push(data[i]);
-        }
-      });
+    SetBoundarySize();
+    this.getAllMemos();
   }
 
   CreateMemo() {
@@ -66,8 +56,12 @@ export class AppComponent implements OnInit{
           message: this.message
         };
 
-        this.memos.push(newMemo);
+        this.httpMemoService.CreateMemo(this.username, this.message).subscribe();
         this.message = "";
+
+        setTimeout(()=>{
+          this.getAllMemos();
+        },1000);
       }
       catch
       {
@@ -100,4 +94,20 @@ export class AppComponent implements OnInit{
       return memo;
     })
   }
+
+  getAllMemos(){
+    //local data
+    //this.memos = this.memoService.GetMemos();
+
+    //API data request
+    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+      for (let i = 0; i < data.length; i++) {
+        data[i].id = this.memos.length + 1;
+        data[i].user = data[i].user['userName'];
+      }
+
+      this.memos = data;
+    });
+  }
+
 }
