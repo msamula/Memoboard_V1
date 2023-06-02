@@ -8,6 +8,7 @@ import {MemoModule} from "./memo/memo.module";
 import {MemoService} from "./services/memo.service";
 import {HttpMemoService} from "./services/http-memo.service";
 import {HttpClientModule} from "@angular/common/http";
+import {SignalService} from "./services/signal.service";
 
 
 
@@ -33,7 +34,8 @@ import {HttpClientModule} from "@angular/common/http";
   //add services here under providers
   providers: [
     MemoService,
-    HttpMemoService
+    HttpMemoService,
+    SignalService
   ],
   bootstrap: [AppComponent]
 })

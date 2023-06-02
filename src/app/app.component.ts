@@ -3,6 +3,7 @@ import {Memo} from "./models/memo";
 import {SetBoundarySize} from "./helper/helperFunctions";
 import {MemoService} from "./services/memo.service";
 import {HttpMemoService} from "./services/http-memo.service";
+import {SignalService} from "./services/signal.service";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit{
   memos!: Memo[];
 
   //DI for MemoService
-  constructor(private memoService: MemoService, private httpMemoService: HttpMemoService) {
+  constructor(private memoService: MemoService, private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
     this.username = "";
     this.message = "";
@@ -50,18 +51,13 @@ export class AppComponent implements OnInit{
 
       try
       {
-        let newMemo: Memo = {
-          id: this.memos.length + 1,
-          user: this.username,
-          message: this.message
-        };
 
-        this.httpMemoService.CreateMemo(this.username, this.message).subscribe();
+        this.signalService.CreateMemo(this.username, this.message);
         this.message = "";
 
-        setTimeout(()=>{
+/*        setTimeout(()=>{
           this.getAllMemos();
-        },1000);
+        },1000);*/
       }
       catch
       {
