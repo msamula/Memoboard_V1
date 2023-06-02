@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Memo} from "./models/memo";
-import {GetWindowSize} from "./helper/helperFunctions";
+import {SetBoundarySize} from "./helper/helperFunctions";
 import {MemoService} from "./services/memo.service";
 import {HttpMemoService} from "./services/http-memo.service";
 
@@ -30,13 +30,13 @@ export class AppComponent implements OnInit{
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
-      GetWindowSize();
+      SetBoundarySize();
 
       //local data
       //this.memos = this.memoService.GetMemos();
 
+      //API data request
       this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
-
         for (let i = 0; i < data.length; i++) {
           data[i].id = this.memos.length + 1;
           data[i].user = data[i].user['userName'];
@@ -77,6 +77,7 @@ export class AppComponent implements OnInit{
       return true;
   }
 
+  //EventHandler for memo-list.component @Output
   handleDelete(event: Memo) {
     this.memos = this.memos.filter((memo: Memo) =>{
       return memo.id !== event.id;

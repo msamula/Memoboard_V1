@@ -27,7 +27,7 @@ import {HttpClientModule} from "@angular/common/http";
     //import the MemoModule
     MemoModule,
 
-    //httpClient
+    //httpClient for http-memo.service und providers
     HttpClientModule
   ],
   //add services here under providers
