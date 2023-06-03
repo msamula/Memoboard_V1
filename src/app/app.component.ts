@@ -66,13 +66,9 @@ export class AppComponent implements OnInit{
 
       try
       {
-
+        //this.httpMemoService.CreateMemo(this.username, this.message).subscribe();
         this.signalService.CreateMemo(this.username, this.message);
         this.message = "";
-
-/*        setTimeout(()=>{
-          this.getAllMemos();
-        },1000);*/
       }
       catch
       {
