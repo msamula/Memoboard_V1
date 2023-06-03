@@ -110,7 +110,7 @@ export class AppComponent implements OnInit{
     //API data request
     this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
       for (let i = 0; i < data.length; i++) {
-        data[i].id = this.memos.length + 1;
+        data[i].id = i + 1;
         data[i].user = data[i].user['userName'];
       }
 
