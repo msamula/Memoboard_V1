@@ -14,11 +14,10 @@ export class SignalService {
   constructor() {
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl(hubURL)
+      .withAutomaticReconnect()
       .build();
 
-    this.connection.on("ReceiveMemo",function (user: string, message: string){
-      console.log(user + " " + message);
-    });
+    this.connection.start();
   }
 
   CreateMemo(username: string, message: string){

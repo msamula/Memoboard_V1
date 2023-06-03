@@ -26,6 +26,21 @@ export class AppComponent implements OnInit{
     this.username = "";
     this.message = "";
     this.memos = [];
+
+    this.signalService.connection.on("ReceiveMemo",(user: string, message: string) => {
+      //this.AddMemo(user, message);
+      this.GetAllMemos();
+    });
+  }
+
+  AddMemo(user: string, message: string){
+    let newMemo = {} as Memo;
+
+    newMemo.id = this.memos.length + 1;
+    newMemo.user = user;
+    newMemo.message = message;
+
+    this.memos.push(newMemo);
   }
 
   // before the actual page load -> lifecycle method of angular
@@ -33,7 +48,7 @@ export class AppComponent implements OnInit{
   ngOnInit(): void{
 
     SetBoundarySize();
-    this.getAllMemos();
+    this.GetAllMemos();
   }
 
   CreateMemo() {
@@ -68,6 +83,7 @@ export class AppComponent implements OnInit{
   }
 
   //EventHandler for memo-list.component @Output
+  // filter memos and override them
   handleDelete(event: Memo) {
     this.memos = this.memos.filter((memo: Memo) =>{
       return memo.id !== event.id;
@@ -91,7 +107,7 @@ export class AppComponent implements OnInit{
     })
   }
 
-  getAllMemos(){
+  GetAllMemos(){
     //local data
     //this.memos = this.memoService.GetMemos();
 
