@@ -14,7 +14,7 @@ import {Memo} from "../../models/memo";
 
 export class MemoListComponent
   {
-    //input -> pass data down
+    //inputMemo -> pass data down (memo from *ngFor="let memo of memos;" from app.component.ts)
     @Input()
     inputMemo!: Memo;
 

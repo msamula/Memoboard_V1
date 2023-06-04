@@ -6,7 +6,6 @@
   width:  var(--width);
   height: var(--height);
   max-width: 100%;
-  border: solid 1px #ccc;
   border-radius: 25px;
   background-color: white;
 }

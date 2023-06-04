@@ -1,23 +1,14 @@
-<div class="container text-center" style="margin-top: 30px">
-  <div class="row">
-    <div class="col input-group flex-nowrap mb-3">
-      <input type="text" class="form-control" placeholder="Username" [(ngModel)]="username">    <!--[(ngModel)] -> two-way-binding from angular-->
-    </div>                                                                                      <!--[(ngModel)] -> banana-binding-->
-    <div class="col input-group flex-nowrap mb-3">
-      <input type="text" class="form-control" placeholder="Message"  [(ngModel)]="message">     <!--ONLY IN INPUT TAG-->
-      <button class="btn btn-success" (click)="CreateMemo()">Create memo</button>                <!--[(ngModel)] -> two-way-binding from angular-->
-    </div>
-  </div>
-</div>
+<app-create-memo></app-create-memo>
 
 <div class="container text-center boundary" style="margin-top: 1%;">
   <div class="row row-cols-6">
+
       <app-memo-list
         *ngFor="let memo of memos;"
         [inputMemo]= "memo"
         (remove)="handleDelete($event)"
-        (change)="handleChange($event)"
-      >
+        (change)="handleChange($event)">
       </app-memo-list>
+
   </div>
 </div>

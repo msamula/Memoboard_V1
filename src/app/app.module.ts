@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from "@angular/forms";
-
-import { AppComponent } from './app.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {MemoModule} from "./memo/memo.module";
-import {MemoService} from "./services/memo.service";
-import {HttpMemoService} from "./services/http-memo.service";
 import {HttpClientModule} from "@angular/common/http";
+
+//bootstrap
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+
+// modules and components
+import { AppComponent } from './app.component';
+import {MemoModule} from "./memo/memo.module";
+
+// services for providers
+import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
 
 
@@ -18,9 +21,6 @@ import {SignalService} from "./services/signal.service";
   ],
   imports: [
     BrowserModule,
-
-    //enables two-way-binding by angular
-    FormsModule,
 
     //bootstrap
     NgbModule,
@@ -33,7 +33,6 @@ import {SignalService} from "./services/signal.service";
   ],
   //add services here under providers
   providers: [
-    MemoService,
     HttpMemoService,
     SignalService
   ],
