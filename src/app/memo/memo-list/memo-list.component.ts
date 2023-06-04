@@ -2,7 +2,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 //user imports
-import {Memo} from "../../models/memo";
+import {Memo} from "../../models/models";
 
 //Decorator
 @Component({

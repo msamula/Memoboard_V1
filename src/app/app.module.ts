@@ -19,18 +19,20 @@ import {SignalService} from "./services/signal.service";
   declarations: [
     AppComponent
   ],
+
   imports: [
     BrowserModule,
+
+    //httpClient for http-memo.service und providers
+    HttpClientModule,
 
     //bootstrap
     NgbModule,
 
     //import the MemoModule
-    MemoModule,
-
-    //httpClient for http-memo.service und providers
-    HttpClientModule
+    MemoModule
   ],
+
   //add services here under providers
   providers: [
     HttpMemoService,

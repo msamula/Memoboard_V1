@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Memo} from "./models/memo";
+import {Memo} from "./models/models";
 import {SetBoundarySize} from "./helper/helperFunctions";
 
 import {HttpMemoService} from "./services/http-memo.service";
@@ -38,6 +38,13 @@ export class AppComponent implements OnInit{
     });
   }
 
+  //API http data request
+  GetAllMemos(){
+    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+      this.memos = data;
+    });
+  }
+
   //EventHandler for memo-list.component @Output
   // filter memos and override them
   handleDelete(event: Memo) {
@@ -62,18 +69,4 @@ export class AppComponent implements OnInit{
       return memo;
     })*/
   }
-
-  GetAllMemos(){
-
-    //API data request
-    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
-      for (let i = 0; i < data.length; i++) {
-        data[i].id = i + 1;
-        data[i].user = data[i].user['userName'];
-      }
-
-      this.memos = data;
-    });
-  }
-
 }
