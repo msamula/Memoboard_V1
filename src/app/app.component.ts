@@ -48,12 +48,16 @@ export class AppComponent implements OnInit{
   //EventHandler for memo-list.component @Output
   // filter memos and override them
   handleDelete(event: Memo) {
-    this.memos = this.memos.filter((memo: Memo) =>{
-      return memo.id !== event.id;
-    })
+    this.httpMemoService.DeleteMemo(event.id).subscribe();
+    this.signalService.UpdateMemoboard();
   }
 
   handleChange(event: Memo) {
+
+    this.memos = this.memos.filter((memo: Memo) =>{
+      return memo.id !== event.id;
+    })
+
 /*    this.memos = this.memos.filter((memo: Memo) =>{
       if(memo.id === event.id)
       {

@@ -20,19 +20,24 @@ export class SignalService {
     this.connection.start();
   }
 
-  CreateMemo(username: string, message: string){
+  UpdateMemoboard(){
 
-    if(this.connection.state === HubConnectionState.Disconnected){
+    setTimeout(() => {
 
-    this.connection.start()
-      .then(()=>{
-        this.connection.invoke("SendMemo", username, message);
-        });
+      if(this.connection.state === HubConnectionState.Disconnected){
+
+        this.connection.start()
+          .then(()=>{
+            this.connection.invoke("UpdateMemoboard");
+          });
       }
 
-    if(this.connection.state === HubConnectionState.Connected) {
+      if(this.connection.state === HubConnectionState.Connected) {
 
-      this.connection.invoke("SendMemo", username, message);
-    }
+        this.connection.invoke("UpdateMemoboard");
+      }
+
+    },100);
+
   }
 }

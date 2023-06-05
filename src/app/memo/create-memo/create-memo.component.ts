@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {SignalService} from "../../services/signal.service";
+import {HttpMemoService} from "../../services/http-memo.service";
 
 @Component({
   selector: 'app-create-memo',
@@ -11,7 +12,7 @@ export class CreateMemoComponent {
   username: string;
   message: string;
 
-  constructor(private signalService: SignalService) {
+  constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
     this.username = '';
     this.message = '';
   }
@@ -31,7 +32,8 @@ export class CreateMemoComponent {
 
     try
     {
-      this.signalService.CreateMemo(this.username, this.message);
+      this.httpMemoService.CreateMemo(this.username, this.message).subscribe();
+      this.signalService.UpdateMemoboard();
       this.message = "";
     }
     catch
