@@ -10,3 +10,23 @@ AddMemo(user: string, message: string){
 
   this.memos.push(newMemo);
 }*/
+
+
+/*    this.memos = this.memos.filter((memo: Memo) =>{
+      return memo.id !== event.id;
+    })*/
+
+/*    this.memos = this.memos.filter((memo: Memo) =>{
+      if(memo.id === event.id)
+      {
+        if(this.message === '')
+        {
+          window.alert('Please enter a new message!');
+          return memo;
+        }
+
+        event.message = this.message;
+        this.message = '';
+      }
+      return memo;
+    })*/

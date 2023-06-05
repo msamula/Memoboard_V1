@@ -26,10 +26,10 @@ export class MemoListComponent
 
     //emit -> fire up the event
     onRemove() {
-        this.remove.emit(this.inputMemo);
+      this.remove.emit(this.inputMemo);
     }
 
     onChange() {
-        this.change.emit(this.inputMemo);
+      this.change.emit(this.inputMemo);
     }
   }

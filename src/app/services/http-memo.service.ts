@@ -22,6 +22,10 @@ export class HttpMemoService {
     return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null);
   }
 
+  ChangeMemoMessage(memoID: number, newMessage: string){
+    return this.http.put(`${_url}/Memo/ChangeMessage/${memoID}?newMemoMessage=${newMessage}`,null);
+  }
+
   DeleteMemo(memoID: number): Observable<any>{
     return this.http.delete(`${_url}/Memo/DeleteMemo/${memoID}`);
   }
