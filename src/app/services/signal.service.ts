@@ -37,6 +37,6 @@ export class SignalService {
         this.connection.invoke("UpdateMemoboard");
       }
 
-    },50);
+    },100);
   }
 }
