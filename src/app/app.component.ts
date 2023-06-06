@@ -39,7 +39,7 @@ export class AppComponent implements OnInit{
   }
 
   //API http data request
-  GetAllMemos(){
+  async GetAllMemos(){
     this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
       this.memos = data;
     });
@@ -47,14 +47,18 @@ export class AppComponent implements OnInit{
 
   //EventHandler for memo-list.component @Output
   // filter memos and override them
-  handleDelete(event: Memo) {
-    this.httpMemoService.DeleteMemo(event.id).subscribe();
-    this.signalService.UpdateMemoboard();
+  async handleDelete(event: Memo) {
+    this.httpMemoService.DeleteMemo(event.id).subscribe()
+      .add(()=>{
+        this.signalService.UpdateMemoboard();
+      });
   }
 
-  handleChange(event: Memo) {
+  async handleChange(event: Memo) {
 
-    this.httpMemoService.ChangeMemoMessage(event.id,event.message).subscribe();
-    this.signalService.UpdateMemoboard();
+    this.httpMemoService.ChangeMemoMessage(event.id,event.message).subscribe()
+      .add(()=>{
+        this.signalService.UpdateMemoboard();
+      });
   }
 }

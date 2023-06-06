@@ -20,23 +20,19 @@ export class SignalService {
     this.connection.start();
   }
 
-  UpdateMemoboard(){
+  async UpdateMemoboard(){
 
-    setTimeout(()=>{
+    if(this.connection.state === HubConnectionState.Disconnected){
 
-      if(this.connection.state === HubConnectionState.Disconnected){
+      this.connection.start()
+        .then(()=>{
+          this.connection.invoke("UpdateMemoboard");
+        });
+    }
 
-        this.connection.start()
-          .then(()=>{
-            this.connection.invoke("UpdateMemoboard");
-          });
-      }
+    if(this.connection.state === HubConnectionState.Connected) {
 
-      if(this.connection.state === HubConnectionState.Connected) {
-
-        this.connection.invoke("UpdateMemoboard");
-      }
-
-    },150);
+      this.connection.invoke("UpdateMemoboard");
+    }
   }
 }

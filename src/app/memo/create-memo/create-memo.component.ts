@@ -42,28 +42,28 @@ export class CreateMemoComponent {
   btnDisabled: boolean;
   usernameDisabled: boolean;
 
-
-
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
+
     this.conStatus =`<i class="bi bi-wifi-1"></i> ${this.signalService.connection.state}`;
     this.conColor = 'background: #ffc107;';
     this.btnDisabled = true;
     this.usernameDisabled = false;
 
-
-    this.GetSignalRStatus();
+    this.ShowSignalRStatus();
   }
 
-  CreateMemo() {
+  async CreateMemo() {
     this._username = this._username.trim();
     this._message = this._message.trim();
 
     try
     {
-      this.httpMemoService.CreateMemo(this._username, this._message).subscribe();
-      this.signalService.UpdateMemoboard();
-      this.usernameDisabled = true;
-      this._message = "";
+      this.httpMemoService.CreateMemo(this._username, this._message).subscribe()
+        .add(()=>{
+          this.signalService.UpdateMemoboard();
+          this.usernameDisabled = true;
+          this._message = "";
+        });
     }
     catch
     {
@@ -71,7 +71,7 @@ export class CreateMemoComponent {
     }
   }
 
-  GetSignalRStatus(){
+  ShowSignalRStatus(){
 
     setInterval(async ()=>{
 
@@ -93,8 +93,9 @@ export class CreateMemoComponent {
 
       if(this.signalService.connection.state === HubConnectionState.Disconnected)
       {
+        this.httpMemoService.GetAllMemos();
+
         this.conStatus =`<i class="bi bi-wifi-off"></i> ${this.signalService.connection.state}`;
-        this.signalService.UpdateMemoboard();
         this.conColor = 'background: #dc3545;';
         this.btnDisabled = true;
       }
