@@ -3,7 +3,7 @@
   --height: 0px;
 }
 .boundary {
-  width:  var(--width);
+  width:  95%;
   height: var(--height);
   max-width: 100%;
   border-radius: 25px;

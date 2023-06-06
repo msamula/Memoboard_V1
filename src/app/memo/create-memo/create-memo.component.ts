@@ -94,7 +94,7 @@ export class CreateMemoComponent {
       if(this.signalService.connection.state === HubConnectionState.Disconnected)
       {
         this.conStatus =`<i class="bi bi-wifi-off"></i> ${this.signalService.connection.state}`;
-        this.signalService.TryReconnect();
+        this.signalService.UpdateMemoboard();
         this.conColor = 'background: #dc3545;';
         this.btnDisabled = true;
       }
