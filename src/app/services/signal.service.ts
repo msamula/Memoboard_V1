@@ -39,4 +39,16 @@ export class SignalService {
 
     },100);
   }
+
+   TryReconnect(){
+
+        this.connection.start();
+
+        setTimeout(()=>{
+          if(this.connection.state === HubConnectionState.Connected){
+            this.connection.invoke("UpdateMemoboard");
+          }
+        },200);
+  }
+
 }

@@ -1,0 +1,8 @@
+.connected{
+  font-size: large;
+  color: #232323;
+  border-radius: 25px;
+  border: solid 2px;
+  padding: 5px 12px 5px 5px;
+  min-width: 135px;
+}
