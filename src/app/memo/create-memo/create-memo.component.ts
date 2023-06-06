@@ -10,46 +10,62 @@ import {HubConnectionState} from "@microsoft/signalr";
 })
 
 export class CreateMemoComponent {
-  username: string;
-  message: string;
+
+  private _username: string = '';
+  private _message: string = '';
+
+  get username(): string {
+    if(this._username.trim().length < 1)
+    {
+      this.btnDisabled = true;
+    }
+    return this._username;
+  }
+
+  set username(value: string) {
+    this._username = value;
+  }
+
+  get message(): string {
+    if(this._message.trim().length < 1 )
+    {
+      this.btnDisabled = true;
+    }
+    return this._message;
+  }
+
+  set message(value: string) {
+    this._message = value;
+  }
+
+
   conStatus: string;
   conColor: string;
   btnDisabled: boolean;
   usernameDisabled: boolean;
 
+
+
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
-    this.username = '';
-    this.message = '';
     this.conStatus =`<i class="bi bi-wifi-1"></i> ${this.signalService.connection.state}`;
     this.conColor = 'background: #ffc107;';
     this.btnDisabled = true;
     this.usernameDisabled = false;
 
+
     this.GetSignalRStatus();
   }
 
   CreateMemo() {
-    this.username = this.username.trim();
-    this.message = this.message.trim();
-
-    if(this.username == "")
-    {
-      window.alert('Please enter a username.');
-      return;
-    }
-
-    if(this.message == "")
-    {
-      window.alert('Please enter a message.');
-      return;
-    }
+    this._username = this._username.trim();
+    this._message = this._message.trim();
 
     try
     {
-      this.httpMemoService.CreateMemo(this.username, this.message).subscribe();
+      this.httpMemoService.CreateMemo(this._username, this._message).subscribe();
       this.signalService.UpdateMemoboard();
       this.usernameDisabled = true;
-      this.message = "";
+      this._message = "";
     }
     catch
     {
