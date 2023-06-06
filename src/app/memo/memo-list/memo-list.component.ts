@@ -14,6 +14,14 @@ import {Memo} from "../../models/models";
 
 export class MemoListComponent
   {
+    newMessage: string;
+    condition: boolean;
+
+    constructor() {
+      this.newMessage = "";
+      this.condition = false;
+    }
+
     //inputMemo -> pass data down (memo from *ngFor="let memo of memos;" from app.component.ts)
     @Input()
     inputMemo!: Memo;
@@ -22,7 +30,7 @@ export class MemoListComponent
     @Output()
     remove: EventEmitter<any> = new EventEmitter();
     @Output()
-    change: EventEmitter<any> = new EventEmitter();
+    confirmChange: EventEmitter<any> = new EventEmitter();
 
     //emit -> fire up the event
     onRemove() {
@@ -30,6 +38,11 @@ export class MemoListComponent
     }
 
     onChange() {
-      this.change.emit(this.inputMemo);
+      this.condition = !this.condition;
+    }
+
+    onConfirmChange() {
+      this.inputMemo.message = this.newMessage;
+      this.confirmChange.emit(this.inputMemo);
     }
   }

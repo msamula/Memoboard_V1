@@ -16,7 +16,7 @@ export class CreateMemoComponent {
 
   get username(): string {
 
-    this._username.trim().length < 1 ? this.btnDisabled = true : this.btnDisabled = false;
+    (this._message.trim().length < 1 || this._username.trim().length < 1) ? this.btnDisabled = true : this.btnDisabled = false;
 
     return this._username;
   }
@@ -27,7 +27,7 @@ export class CreateMemoComponent {
 
   get message(): string {
 
-    this._message.trim().length < 1 ? this.btnDisabled = true : this.btnDisabled = false;
+    (this._message.trim().length < 1 || this._username.trim().length < 1) ? this.btnDisabled = true : this.btnDisabled = false;
 
     return this._message;
   }

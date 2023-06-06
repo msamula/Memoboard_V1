@@ -5,10 +5,14 @@
     {{inputMemo.user.userName}}
   </div>
   <div class="card-body">
-    <p class="card-text">{{inputMemo.message}}</p>
+    <p *ngIf="!condition" class="card-text">{{inputMemo.message}}</p>
 
-    <button title="edit message" class="btn btn-sm btn-outline-dark" (click)="onChange()"><i class="bi bi-pencil-square"></i></button>
-    <button title="delete memo in database" class="btn btn-sm btn-danger"       (click)="onRemove()"><i class="bi bi-trash"></i></button>
+    <input  *ngIf="condition" type="text" class="form-control" [(ngModel)]="newMessage">
+    <button *ngIf="condition" title="cancel new message" class="btn btn-sm btn-danger"     (click)="onChange()"><i class="bi bi-x-square"></i></button>
+    <button *ngIf="condition" title="confirm new message" class="btn btn-sm btn-outline-success"     (click)="onConfirmChange()"><i class="bi bi-check2-square"></i></button>
+
+    <button *ngIf="!condition" title="edit message" class="btn btn-sm btn-outline-dark"      (click)="onChange()"><i class="bi bi-pencil-square"></i></button>
+    <button *ngIf="!condition" title="delete memo in database" class="btn btn-sm btn-danger" (click)="onRemove()"><i class="bi bi-trash"></i></button>
   </div>
 </div>
 

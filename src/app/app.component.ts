@@ -54,7 +54,7 @@ export class AppComponent implements OnInit{
 
   handleChange(event: Memo) {
 
-    this.httpMemoService.ChangeMemoMessage(event.id,'event.message').subscribe();
+    this.httpMemoService.ChangeMemoMessage(event.id,event.message).subscribe();
     this.signalService.UpdateMemoboard();
   }
 }

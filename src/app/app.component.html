@@ -7,7 +7,7 @@
         *ngFor="let memo of memos;"
         [inputMemo]= "memo"
         (remove)="handleDelete($event)"
-        (change)="handleChange($event)">
+        (confirmChange)="handleChange($event)">
       </app-memo-list>
 
   </div>
