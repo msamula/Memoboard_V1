@@ -4,6 +4,6 @@ export interface User{
 
 export interface Memo{
   id: number,
-  user: User,            //any bcs of the json object we got from the API
+  user: User,
   message: string
 }

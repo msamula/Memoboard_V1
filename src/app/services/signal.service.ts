@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import * as signalR from "@microsoft/signalr";
 import {HubConnectionState} from "@microsoft/signalr";
 
-const hubURL = 'https://localhost:7296/memohub';
+//const hubURL = 'https://localhost:7296/memohub';
+const hubURL = 'http://192.168.178.119:8099/memohub';
 
 @Injectable({
   providedIn: 'root'

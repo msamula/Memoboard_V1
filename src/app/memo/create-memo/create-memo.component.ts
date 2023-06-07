@@ -52,7 +52,7 @@ export class CreateMemoComponent {
     this.ShowSignalRStatus();
   }
 
-  async CreateMemo() {
+  async BtnCreateMemo() {
     this._username = this._username.trim();
     this._message = this._message.trim();
 

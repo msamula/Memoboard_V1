@@ -29,13 +29,15 @@ export class AppComponent implements OnInit{
   // after the constructor
   ngOnInit(): void{
 
+    //set the height of the boundary
     SetBoundarySize();
 
-    this.GetAllMemos();
-
+    // "UpdateMemoboard" -> "key" from signalR API
     this.signalService.connection.on("UpdateMemoboard",() => {
       this.GetAllMemos();
     });
+
+    this.GetAllMemos();
   }
 
   //API http data request

@@ -23,7 +23,7 @@ import {SignalService} from "./services/signal.service";
   imports: [
     BrowserModule,
 
-    //httpClient for http-memo.service und providers
+    //httpClient for http-memo.service
     HttpClientModule,
 
     //bootstrap
