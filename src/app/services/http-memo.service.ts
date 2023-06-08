@@ -20,7 +20,7 @@ export class HttpMemoService {
   }
 
   CreateMemo(username: string, message: string): Observable<any>{
-    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null);
+    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{observe: "response"});
   }
 
   ChangeMemoMessage(memoID: number, newMessage: string): Observable<any>{

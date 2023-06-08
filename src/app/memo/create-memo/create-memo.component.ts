@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {SignalService} from "../../services/signal.service";
 import {HttpMemoService} from "../../services/http-memo.service";
 import {HubConnectionState} from "@microsoft/signalr";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-memo',
@@ -41,6 +42,7 @@ export class CreateMemoComponent {
   conColor: string;
   btnDisabled: boolean;
   usernameDisabled: boolean;
+  messageDisabled: boolean;
 
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
@@ -48,6 +50,7 @@ export class CreateMemoComponent {
     this.conColor = 'background: #ffc107;';
     this.btnDisabled = true;
     this.usernameDisabled = false;
+    this.messageDisabled = false;
 
     this.ShowSignalRStatus();
   }
@@ -58,7 +61,21 @@ export class CreateMemoComponent {
 
     try
     {
-      this.httpMemoService.CreateMemo(this._username, this._message).subscribe()
+      this.httpMemoService.CreateMemo(this._username, this._message).subscribe(
+        ()=>{},
+        (e: HttpErrorResponse) => {
+          console.log(e);
+          if(e.status === 429){
+
+            this.messageDisabled = true;
+
+            setTimeout( ()=>{
+              this.messageDisabled = false;
+            },14999);
+
+            window.alert(`HttpResponseStatusCode: ${e.status}\nYou can't create more than 5 memos in 15 seconds.`);
+          }
+        })
         .add(()=>{
           this.signalService.UpdateMemoboard();
           this.usernameDisabled = true;
