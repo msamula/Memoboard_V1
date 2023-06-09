@@ -9,5 +9,6 @@ export interface Memo{
 }
 
 export interface DisplayedMemo extends Memo{
-  isDifferent: boolean
+  isDifferent: boolean,
+  isNew: boolean
 }

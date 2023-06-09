@@ -22,13 +22,25 @@ import {DisplayedMemo} from "../../models/models";
       state('end',
 
         style({
-          backgroundColor: 'black',
-          color: 'white'
+          backgroundColor: '#ffc107',
+          scale: 0.8
+        })),
+      state('new',
+
+        style({
+          backgroundColor: '#198754',
+          scale: 0.8
         })),
       transition('start => end', [
         animate('0.3s')
       ]),
       transition('end => start', [
+        animate('0.3s')
+      ]),
+      transition('start => new', [
+        animate('0.3s')
+      ]),
+      transition('new => start', [
         animate('0.3s')
       ]),
     ]),
@@ -40,14 +52,29 @@ export class MemoListComponent implements OnInit{
     createNewMessage: boolean;
     newMessageInput: string;
     memoChanged: boolean;
+    memoNew: boolean;
 
     constructor() {
       this.newMessageInput = "";
       this.createNewMessage = false;
       this.memoChanged = true;
+      this.memoNew = true;
+
     }
 
     ngOnInit(): void {
+
+      if(this.inputMemo.isNew){
+
+        setTimeout(()=>{
+          this.memoNew = !this.memoNew;
+        },1);
+
+        setTimeout(()=>{
+          this.memoNew = !this.memoNew;
+        },310);
+      }
+
       if(this.inputMemo.isDifferent){
 
         setTimeout(()=>{
@@ -56,7 +83,7 @@ export class MemoListComponent implements OnInit{
 
         setTimeout(()=>{
           this.memoChanged = !this.memoChanged;
-        },550);
+        },310);
       }
     }
 

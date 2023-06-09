@@ -18,10 +18,11 @@ export function CreateDisplayMemos(existingMemos: DisplayedMemo[], incomingMemos
     memo.user = incomingMemos[i].user;
     memo.message = incomingMemos[i].message;
     memo.isDifferent = false;
+    memo.isNew = false;
 
     if(existingMemos.length > 0){
 
-      memo.isDifferent = incomingMemos[i].id > existingMemos[existingMemos.length-1].id;
+      memo.isNew = incomingMemos[i].id > existingMemos[existingMemos.length-1].id;
 
       for(let j = 0; j < existingMemos.length; j++) {
 
