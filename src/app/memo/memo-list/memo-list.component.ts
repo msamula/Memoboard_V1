@@ -29,7 +29,8 @@ import {DisplayedMemo} from "../../models/models";
 
         style({
           backgroundColor: '#198754',
-          scale: 0.8
+          opacity: 0.9,
+          scale: 1.2
         })),
       transition('start => end', [
         animate('0.3s')
