@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Memo} from "./models/models";
-import {SetBoundarySize} from "./helper/helperFunctions";
+import {DisplayedMemo, Memo} from "./models/models";
+import {CreateDisplayMemos, SetBoundarySize} from "./helper/helperFunctions";
 
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit{
 
   //smart component
   // ! -> cant be null
-  memos!: Memo[];
+  memos!: DisplayedMemo[];
 
   //DI for MemoService
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
@@ -43,20 +43,21 @@ export class AppComponent implements OnInit{
   //API http data request
   async GetAllMemos(){
     this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
-      this.memos = data;
+
+      this.memos = CreateDisplayMemos(this.memos, data);
     });
   }
 
   //EventHandler for memo-list.component @Output
   // filter memos and override them
-  async handleDelete(event: Memo) {
+  async handleDelete(event: DisplayedMemo) {
     this.httpMemoService.DeleteMemo(event.id).subscribe()
       .add(()=>{
         this.signalService.UpdateMemoboard();
       });
   }
 
-  async handleChange(event: Memo) {
+  async handleChange(event: DisplayedMemo) {
 
     this.httpMemoService.ChangeMemoMessage(event.id,event.message).subscribe()
       .add(()=>{

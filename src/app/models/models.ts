@@ -7,3 +7,7 @@ export interface Memo{
   user: User,
   message: string
 }
+
+export interface DisplayedMemo extends Memo{
+  isDifferent: boolean
+}
