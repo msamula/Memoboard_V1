@@ -1,11 +1,42 @@
 :root{
   --width: 0px;
   --height: 0px;
+  --btnHeight: 0px;
 }
 .boundary {
-  width:  95%;
+  width:  97%;
   height: var(--height);
   max-width: 100%;
   border-radius: 25px;
   background-color: white;
+}
+
+.addMemoButton{
+  background-color: #0d6efd;
+  border-radius: 50px;
+  z-index: 100;
+  color: white;
+  font-size: 35px;
+  width: 100px;
+  height: 100px;
+  border: 0px;
+  position: relative;
+  top: var(--btnHeight);
+  left: 10px;
+  cursor: move;
+}
+
+.addMemoButton:active{
+  background-color: #dc3545;
+}
+
+.createMemo{
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  z-index: 100;
+  min-width: 154px;
+  cursor: move;
+  background-color: #232323;
+  border-radius: 25px;
 }

@@ -15,6 +15,9 @@ import {SignalService} from "./services/signal.service";
 // implements is a form of inheritance
 export class AppComponent implements OnInit{
 
+  showCreateMemo: boolean;
+  showBtn: boolean;
+
   //smart component
   // ! -> cant be null
   memos!: DisplayedMemo[];
@@ -23,6 +26,8 @@ export class AppComponent implements OnInit{
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
     this.memos = [];
+    this.showCreateMemo = true;
+    this.showBtn = false;
   }
 
   // before the actual page load -> lifecycle method of angular
@@ -63,5 +68,15 @@ export class AppComponent implements OnInit{
       .add(()=>{
         this.signalService.UpdateMemoboard();
       });
+  }
+
+  AddMemo() {
+    this.showCreateMemo = !this.showCreateMemo;
+    this.showBtn = !this.showBtn;
+
+    setTimeout(()=>{
+      this.showCreateMemo = !this.showCreateMemo;
+      this.showBtn = !this.showBtn;
+    },25000)
   }
 }

@@ -1,4 +1,4 @@
-<app-create-memo></app-create-memo>
+<app-create-memo class="createMemo" [hidden]="showCreateMemo" cdkDrag></app-create-memo>
 
 <div class="container text-center boundary" style="margin-top: 1%;">
   <div class="row row-cols-6">
@@ -12,3 +12,5 @@
 
   </div>
 </div>
+
+<button title="create a memo" class="addMemoButton" cdkDrag [hidden]="showBtn"><i class="bi bi-file-earmark-plus" (click)="AddMemo()" style="cursor: pointer"></i></button>

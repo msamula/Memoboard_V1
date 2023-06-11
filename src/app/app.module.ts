@@ -13,6 +13,7 @@ import {MemoModule} from "./memo/memo.module";
 // services for providers
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
+import {CdkDrag} from "@angular/cdk/drag-drop";
 
 
 
@@ -32,6 +33,9 @@ import {SignalService} from "./services/signal.service";
 
     //bootstrap
     NgbModule,
+
+    //for memo-list.component.html file -> drag and drop
+    CdkDrag,
 
     //import the MemoModule
     MemoModule
