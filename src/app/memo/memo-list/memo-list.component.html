@@ -2,7 +2,7 @@
 
 <!--Memo Card-->
 
-<div [@trigger]="memoChanged ? 'start' : 'end'" [@trigger]="memoNew ? 'start' : 'new'" class="card border-dark mb-3 memoBox" cdkDragBoundary=".boundary" cdkDrag>     <!--.boundary in css-->
+<div [@showChange]="memoChanged ? 'start' : 'changed'" [@showNew]="memoNew ? 'start' : 'new'" class="card border-dark mb-3 memoBox" cdkDragBoundary=".boundary" cdkDrag>     <!--.boundary in css-->
   <div class="card-header">
     {{inputMemo.user.userName}}
   </div>
@@ -12,13 +12,13 @@
     <input *ngIf="createNewMessage" type="text" class="form-control" [(ngModel)]="newMessageInput">
 
     <div class="btn-group" role="group">
-      <button *ngIf="createNewMessage" title="cancel new message" class="btn btn-sm btn-danger" (click)="onChange()"><i class="bi bi-x-square"></i></button>
-      <button *ngIf="createNewMessage" title="confirm new message" class="btn btn-sm btn-outline-success" (click)="onConfirmChange()"><i class="bi bi-check2-square"></i></button>
+      <button *ngIf="createNewMessage" title="cancel new message" class="btn btn-sm btn-danger" (click)="OnChange()"><i class="bi bi-x-square"></i></button>
+      <button *ngIf="createNewMessage" title="confirm new message" class="btn btn-sm btn-outline-success" (click)="OnConfirmChange()"><i class="bi bi-check2-square"></i></button>
     </div>
 
     <div class="btn-group" role="group">
-      <button *ngIf="!createNewMessage" title="edit message" class="btn btn-sm btn-outline-dark" (click)="onChange()"><i class="bi bi-pencil-square"></i></button>
-      <button *ngIf="!createNewMessage" title="delete memo in database" class="btn btn-sm btn-danger" (click)="onRemove()"><i class="bi bi-trash"></i></button>
+      <button *ngIf="!createNewMessage" title="edit message" class="btn btn-sm btn-outline-dark" (click)="OnChange()"><i class="bi bi-pencil-square"></i></button>
+      <button *ngIf="!createNewMessage" title="delete memo in database" class="btn btn-sm btn-danger" (click)="OnRemove()"><i class="bi bi-trash"></i></button>
     </div>
   </div>
 </div>

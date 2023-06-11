@@ -12,38 +12,42 @@ import {DisplayedMemo} from "../../models/models";
   styleUrls: ['./memo-list.component.css'],     //list of css of the component
 
   animations: [
-    trigger('trigger', [
+    trigger('showChange', [
 
       state('start',
-
         style({
-
+          // normal style
         })),
-      state('end',
 
+      state('changed',
         style({
           backgroundColor: '#ffc107',
           scale: 0.8
         })),
-      state('new',
 
+      transition('start <=> changed', [
+        animate('0.3s')
+      ])
+    ]),
+
+
+    trigger('showNew', [
+
+      state('start',
+        style({
+          // normal style
+        })),
+
+      state('new',
         style({
           backgroundColor: '#198754',
           opacity: 0.9,
           scale: 1.2
         })),
-      transition('start => end', [
+
+      transition('start <=> new', [
         animate('0.3s')
-      ]),
-      transition('end => start', [
-        animate('0.3s')
-      ]),
-      transition('start => new', [
-        animate('0.3s')
-      ]),
-      transition('new => start', [
-        animate('0.3s')
-      ]),
+      ])
     ]),
   ]
 })
@@ -64,7 +68,34 @@ export class MemoListComponent implements OnInit{
     }
 
     ngOnInit(): void {
+      this.Animate();
+    }
 
+    //inputMemo -> pass data down (memo from *ngFor="let memo of memos;" from app.component.ts)
+    @Input()
+    inputMemo!: DisplayedMemo;
+
+    //output -> pass data up with events
+    @Output()
+    remove: EventEmitter<any> = new EventEmitter();
+    @Output()
+    confirmChange: EventEmitter<any> = new EventEmitter();
+
+    //emit -> fire up the event
+    OnRemove() {
+      this.remove.emit(this.inputMemo);
+    }
+
+    OnChange() {
+      this.createNewMessage = !this.createNewMessage;
+    }
+
+    OnConfirmChange() {
+      this.inputMemo.message = this.newMessageInput;
+      this.confirmChange.emit(this.inputMemo);
+    }
+
+    Animate(){
       if(this.inputMemo.isNew){
 
         setTimeout(()=>{
@@ -86,29 +117,5 @@ export class MemoListComponent implements OnInit{
           this.memoChanged = !this.memoChanged;
         },310);
       }
-    }
-
-    //inputMemo -> pass data down (memo from *ngFor="let memo of memos;" from app.component.ts)
-    @Input()
-    inputMemo!: DisplayedMemo;
-
-    //output -> pass data up with events
-    @Output()
-    remove: EventEmitter<any> = new EventEmitter();
-    @Output()
-    confirmChange: EventEmitter<any> = new EventEmitter();
-
-    //emit -> fire up the event
-    onRemove() {
-      this.remove.emit(this.inputMemo);
-    }
-
-    onChange() {
-      this.createNewMessage = !this.createNewMessage;
-    }
-
-    onConfirmChange() {
-      this.inputMemo.message = this.newMessageInput;
-      this.confirmChange.emit(this.inputMemo);
     }
 }
