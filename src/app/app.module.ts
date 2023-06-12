@@ -7,13 +7,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 // modules and components
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component';
 import {MemoModule} from "./memo/memo.module";
 
 // services for providers
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
-import {CdkDrag} from "@angular/cdk/drag-drop";
+import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 
 
 
@@ -36,6 +36,7 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
 
     //for memo-list.component.html file -> drag and drop
     CdkDrag,
+    CdkDropList,
 
     //import the MemoModule
     MemoModule

@@ -1,10 +1,13 @@
-<div class="windowBoundary">
+<div class="container windowBoundary">
 
-  <div class="container text-center boundary" style="margin-top: 1%;">
+  <button title="create a memo" class="addMemoButton" cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn"><i class="bi bi-file-earmark-plus" (click)="SwitchBtnCreateMemo()" style="cursor: pointer"></i></button>
+  <app-create-memo class="createMemo" (cancel)="SwitchBtnCreateMemo()" [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".windowBoundary"></app-create-memo>
 
-    <app-create-memo class="createMemo" (cancel)="AddMemo()" [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".boundary"></app-create-memo>
+  <div class="row text-center boundary" style="margin-top: 1%;">
 
-    <div class="row row-cols-6">
+    <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]" [cdkDropListData]="memos" (cdkDropListDropped)="drop($event)" class="col myList">
+
+        <label style="background-color: #198754">Start</label>
 
         <app-memo-list
           *ngFor="let memo of memos;"
@@ -15,8 +18,28 @@
 
     </div>
 
+    <div cdkDropList #activeList="cdkDropList" [cdkDropListConnectedTo]="[startList,finishedList]" [cdkDropListData]="activeMemos" (cdkDropListDropped)="drop($event)" class="col myList">
+
+      <label style="background-color: #0dcaf0">Active</label>
+
+      <app-memo-list
+        *ngFor="let memo of activeMemos;"
+        [inputMemo]= "memo"
+        (remove)="handleDelete($event)"
+        (confirmChange)="handleChange($event)">
+      </app-memo-list>
+    </div>
+
+    <div cdkDropList #finishedList="cdkDropList" [cdkDropListConnectedTo]="[startList,activeList]" [cdkDropListData]="finishedMemos" (cdkDropListDropped)="drop($event)" class="col myList">
+
+      <label style="background-color: #dc3545">Finished</label>
+
+      <app-memo-list
+        *ngFor="let memo of finishedMemos;"
+        [inputMemo]= "memo"
+        (remove)="handleDelete($event)"
+        (confirmChange)="handleChange($event)">
+      </app-memo-list>
+    </div>
   </div>
-
-  <button title="create a memo" class="addMemoButton" cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn"><i class="bi bi-file-earmark-plus" (click)="AddMemo()" style="cursor: pointer"></i></button>
-
 </div>

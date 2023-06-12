@@ -119,9 +119,11 @@ export class MemoListComponent implements OnInit{
   iSawMemo() {
     if(this.inputMemo.isDifferent){
       this.memoChanged = !this.memoChanged;
+      this.inputMemo.isDifferent = false;
     }
     if(this.inputMemo.isNew){
       this.memoNew = !this.memoNew;
+      this.inputMemo.isNew = false;
     }
     this.iSaw = !this.iSaw;
   }

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DisplayedMemo, Memo} from "./models/models";
-import {CreateDisplayMemos, SetBoundarySize} from "./helper/helperFunctions";
+import {CreateDisplayedMemos, SetBoundarySize} from "./helper/helperFunctions";
 
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-root',
@@ -21,11 +22,17 @@ export class AppComponent implements OnInit{
   //smart component
   // ! -> cant be null
   memos!: DisplayedMemo[];
+  activeMemos!: DisplayedMemo[];
+  finishedMemos!: DisplayedMemo[];
+
 
   //DI for MemoService
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
     this.memos = [];
+    this.activeMemos = [];
+    this.finishedMemos = [];
+
     this.showCreateMemo = true;
     this.showBtn = false;
   }
@@ -49,7 +56,7 @@ export class AppComponent implements OnInit{
   async GetAllMemos(){
     this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
 
-      this.memos = CreateDisplayMemos(this.memos, data);
+      this.memos = CreateDisplayedMemos(this.memos, data);
     });
   }
 
@@ -70,8 +77,21 @@ export class AppComponent implements OnInit{
       });
   }
 
-  AddMemo() {
+  SwitchBtnCreateMemo() {
     this.showCreateMemo = !this.showCreateMemo;
     this.showBtn = !this.showBtn;
+  }
+
+  drop(event: CdkDragDrop<DisplayedMemo[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
   }
 }

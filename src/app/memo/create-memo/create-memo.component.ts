@@ -71,7 +71,6 @@ export class CreateMemoComponent {
       this.httpMemoService.CreateMemo(this._username, this._message).subscribe(
         ()=>{},
         (e: HttpErrorResponse) => {
-          console.log(e);
           if(e.status === 429){
 
             this.messageDisabled = true;

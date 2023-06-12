@@ -1,21 +1,19 @@
 :root{
   --width: 0px;
   --height: 0px;
-  --btnHeight: 0px;
-  --windowHeight: 0px;
-}
-.boundary {
-  width:  97%;
-  height: var(--height);
-  max-width: 100%;
-  border-radius: 25px;
-  background-color: white;
 }
 
 .windowBoundary{
-  width: 100%;
-  height: var(--windowHeight);
-  border: 1px solid transparent;
+  width: 98%;
+  max-width: 100%;
+}
+
+.boundary {
+  width:  100%;
+  height: var(--height);
+  border-color: transparent;
+  border-radius: 25px;
+  background-color: transparent;
 }
 
 .addMemoButton{
@@ -27,9 +25,9 @@
   width: 100px;
   height: 100px;
   border: 0px;
-  position: relative;
-  top: var(--btnHeight);
-  left: 10px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
   cursor: move;
 }
 
@@ -48,6 +46,23 @@
   border-radius: 25px;
 }
 
+.createMemo:active{
+  opacity: 0.9;
+}
+
 .bi-file-earmark-plus:hover{
   color: #232323;
+}
+
+.myList {
+  border: solid 1px #000;
+  display: block;
+  border-radius: 25px;
+  background-color: white;
+}
+
+label{
+  font-size: larger;
+  display: block;
+  border-radius: 25px;
 }
