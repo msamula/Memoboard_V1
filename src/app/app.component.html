@@ -1,16 +1,22 @@
-<app-create-memo class="createMemo" [hidden]="showCreateMemo" cdkDrag></app-create-memo>
+<div class="windowBoundary">
 
-<div class="container text-center boundary" style="margin-top: 1%;">
-  <div class="row row-cols-6">
+  <div class="container text-center boundary" style="margin-top: 1%;">
 
-      <app-memo-list
-        *ngFor="let memo of memos;"
-        [inputMemo]= "memo"
-        (remove)="handleDelete($event)"
-        (confirmChange)="handleChange($event)">
-      </app-memo-list>
+    <app-create-memo class="createMemo" (cancel)="AddMemo()" [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".boundary"></app-create-memo>
+
+    <div class="row row-cols-6">
+
+        <app-memo-list
+          *ngFor="let memo of memos;"
+          [inputMemo]= "memo"
+          (remove)="handleDelete($event)"
+          (confirmChange)="handleChange($event)">
+        </app-memo-list>
+
+    </div>
 
   </div>
-</div>
 
-<button title="create a memo" class="addMemoButton" cdkDrag [hidden]="showBtn"><i class="bi bi-file-earmark-plus" (click)="AddMemo()" style="cursor: pointer"></i></button>
+  <button title="create a memo" class="addMemoButton" cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn"><i class="bi bi-file-earmark-plus" (click)="AddMemo()" style="cursor: pointer"></i></button>
+
+</div>

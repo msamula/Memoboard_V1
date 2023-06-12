@@ -6,6 +6,7 @@ export function SetBoundarySize() {
   document.documentElement.style.setProperty('--width', `${width - (width * 0.1)}px`);
   document.documentElement.style.setProperty('--height', `${height - (height * 0.05)}px`);
   document.documentElement.style.setProperty('--btnHeight', `${-(height - (height * 0.03))}px`);
+  document.documentElement.style.setProperty('--windowHeight', `${height}px`);
 }
 
 export function CreateDisplayMemos(existingMemos: DisplayedMemo[], incomingMemos: Memo[]): DisplayedMemo[]

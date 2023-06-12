@@ -22,7 +22,7 @@ import {DisplayedMemo} from "../../models/models";
       state('changed',
         style({
           backgroundColor: '#ffc107',
-          scale: 0.8
+          /*scale: 0.8*/
         })),
 
       transition('start <=> changed', [
@@ -41,8 +41,8 @@ import {DisplayedMemo} from "../../models/models";
       state('new',
         style({
           backgroundColor: '#198754',
-          opacity: 0.9,
-          scale: 1.2
+/*          opacity: 0.9,
+          scale: 1.2*/
         })),
 
       transition('start <=> new', [
@@ -58,10 +58,12 @@ export class MemoListComponent implements OnInit{
     newMessageInput: string;
     memoChanged: boolean;
     memoNew: boolean;
+    iSaw: boolean;
 
     constructor() {
       this.newMessageInput = "";
       this.createNewMessage = false;
+      this.iSaw = true;
       this.memoChanged = true;
       this.memoNew = true;
 
@@ -82,6 +84,7 @@ export class MemoListComponent implements OnInit{
     confirmChange: EventEmitter<any> = new EventEmitter();
 
     //emit -> fire up the event
+
     OnRemove() {
       this.remove.emit(this.inputMemo);
     }
@@ -100,22 +103,26 @@ export class MemoListComponent implements OnInit{
 
         setTimeout(()=>{
           this.memoNew = !this.memoNew;
+          this.iSaw = !this.iSaw;
         },1);
-
-        setTimeout(()=>{
-          this.memoNew = !this.memoNew;
-        },310);
       }
 
       if(this.inputMemo.isDifferent){
 
         setTimeout(()=>{
           this.memoChanged = !this.memoChanged;
+          this.iSaw = !this.iSaw;
         },1);
-
-        setTimeout(()=>{
-          this.memoChanged = !this.memoChanged;
-        },310);
       }
     }
+
+  iSawMemo() {
+    if(this.inputMemo.isDifferent){
+      this.memoChanged = !this.memoChanged;
+    }
+    if(this.inputMemo.isNew){
+      this.memoNew = !this.memoNew;
+    }
+    this.iSaw = !this.iSaw;
+  }
 }

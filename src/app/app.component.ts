@@ -73,10 +73,5 @@ export class AppComponent implements OnInit{
   AddMemo() {
     this.showCreateMemo = !this.showCreateMemo;
     this.showBtn = !this.showBtn;
-
-    setTimeout(()=>{
-      this.showCreateMemo = !this.showCreateMemo;
-      this.showBtn = !this.showBtn;
-    },25000)
   }
 }

@@ -2,6 +2,7 @@
   --width: 0px;
   --height: 0px;
   --btnHeight: 0px;
+  --windowHeight: 0px;
 }
 .boundary {
   width:  97%;
@@ -9,6 +10,12 @@
   max-width: 100%;
   border-radius: 25px;
   background-color: white;
+}
+
+.windowBoundary{
+  width: 100%;
+  height: var(--windowHeight);
+  border: 1px solid transparent;
 }
 
 .addMemoButton{
@@ -39,4 +46,8 @@
   cursor: move;
   background-color: #232323;
   border-radius: 25px;
+}
+
+.bi-file-earmark-plus:hover{
+  color: #232323;
 }

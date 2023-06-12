@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {SignalService} from "../../services/signal.service";
 import {HttpMemoService} from "../../services/http-memo.service";
 import {HubConnectionState} from "@microsoft/signalr";
@@ -53,6 +53,13 @@ export class CreateMemoComponent {
     this.messageDisabled = false;
 
     this.ShowSignalRStatus();
+  }
+
+  @Output()
+  cancel: EventEmitter<any> = new EventEmitter();
+
+  OnCancel(){
+    this.cancel.emit();
   }
 
   async BtnCreateMemo() {
