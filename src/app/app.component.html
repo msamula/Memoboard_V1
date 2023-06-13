@@ -5,12 +5,12 @@
 
   <div class="row text-center boundary" style="margin-top: 1%;">
 
-    <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]" [cdkDropListData]="memos" (cdkDropListDropped)="drop($event)" class="col myList">
+    <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]" [cdkDropListData]="startmemos" (cdkDropListDropped)="drop($event)" class="col myList">
 
         <label style="background-color: #198754">Start</label>
 
         <app-memo-list
-          *ngFor="let memo of memos;"
+          *ngFor="let memo of startmemos;"
           [inputMemo]= "memo"
           (remove)="handleDelete($event)"
           (confirmChange)="handleChange($event)">

@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   //smart component
   // ! -> cant be null
   memos!: DisplayedMemo[];
+  startmemos!: DisplayedMemo[];
   activeMemos!: DisplayedMemo[];
   finishedMemos!: DisplayedMemo[];
 
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit{
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
     this.memos = [];
+    this.startmemos = [];
     this.activeMemos = [];
     this.finishedMemos = [];
 
@@ -56,7 +58,9 @@ export class AppComponent implements OnInit{
   async GetAllMemos(){
     this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
 
-      this.memos = CreateDisplayedMemos(this.memos, data);
+      //this.memos = CreateDisplayedMemos(this.memos, data);
+      this.startmemos = CreateDisplayedMemos(this.startmemos, data);
+      //sortMemos([this.startmemos,this.activeMemos,this.finishedMemos],this.memos)
     });
   }
 

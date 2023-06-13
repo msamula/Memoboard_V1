@@ -28,8 +28,11 @@ export function CreateDisplayedMemos(existingMemos: DisplayedMemo[], incomingMem
 
         if(existingMemos[j].id === incomingMemos[i].id)
         {
-
-          if(existingMemos[j].message !== incomingMemos[i].message)
+          if(existingMemos[j].isNew)
+          {
+            memo.isNew = true;
+          }
+          if( existingMemos[i].isDifferent || existingMemos[j].message !== incomingMemos[i].message)
           {
             memo.isDifferent = true;
           }
@@ -42,3 +45,34 @@ export function CreateDisplayedMemos(existingMemos: DisplayedMemo[], incomingMem
 
   return results;
 }
+
+/*export function sortMemos(memoLists: DisplayedMemo[][], incomingMemos: DisplayedMemo[]){
+
+  for (let h = 0; h <incomingMemos.length; h++) {
+    for (let i = memoLists.length-1 ; i <= 0; i--) {
+      for (let j = 0; j < memoLists[i].length; j++) {
+        if(memoLists[i][j].id === incomingMemos[h].id){
+
+          let index = memoLists[i].indexOf(memoLists[i][j], 0);
+          if (index > -1) {
+            memoLists[i].splice(index, 1);
+          }
+
+          memoLists[i].push(incomingMemos[h]);
+
+          index = incomingMemos.indexOf(incomingMemos[h], 0);
+          if (index > -1) {
+            incomingMemos.splice(index, 1);
+          }
+        }
+      }
+    }
+  }
+  console.log(incomingMemos);
+  if(incomingMemos.length > 0)
+  {
+    for (let i = 0; i < incomingMemos.length; i++) {
+      memoLists[0].push(incomingMemos[i]);
+    }
+  }
+}*/
