@@ -7,7 +7,7 @@
 
     <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]" [cdkDropListData]="startMemos" (cdkDropListDropped)="drop($event)" class="col myList">
 
-        <label style="background-color: #198754">Start</label>
+        <label style="background-color: #ffc93c">Start</label>
 
         <app-memo-list
           *ngFor="let memo of startMemos;"
@@ -20,7 +20,7 @@
 
     <div cdkDropList #activeList="cdkDropList" [cdkDropListConnectedTo]="[startList,finishedList]" [cdkDropListData]="activeMemos" (cdkDropListDropped)="drop($event)" class="col myList">
 
-      <label style="background-color: #0dcaf0">Active</label>
+      <label style="background-color: #ff9a3c">Active</label>
 
       <app-memo-list
         *ngFor="let memo of activeMemos;"
@@ -32,7 +32,7 @@
 
     <div cdkDropList #finishedList="cdkDropList" [cdkDropListConnectedTo]="[startList,activeList]" [cdkDropListData]="finishedMemos" (cdkDropListDropped)="drop($event)" class="col myList">
 
-      <label style="background-color: #dc3545">Finished</label>
+      <label style="background-color: #ff6f3c">Finished</label>
 
       <app-memo-list
         *ngFor="let memo of finishedMemos;"

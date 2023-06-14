@@ -42,7 +42,7 @@
   z-index: 100;
   min-width: 154px;
   cursor: move;
-  background-color: #232323;
+  background-color: var(--firstColor);
   border-radius: 25px;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .bi-file-earmark-plus:hover{
-  color: #232323;
+  color: var(--firstColor);
   animation: none;
 }
 
@@ -69,7 +69,7 @@ label{
 
 .myList {
   max-height:var(--height);
-  border: solid 1px #000;
+  border: solid 1px var(--firstColor);
   display: block;
   border-radius: 25px;
   background-color: white;
