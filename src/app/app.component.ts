@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DisplayedMemo, Memo} from "./models/models";
-import {CreateDisplayedMemos, SetBoundarySize} from "./helper/helperFunctions";
+import {CreateDisplayedMemos, SetBoundarySize, SortMemos} from "./helper/helperFunctions";
 
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
@@ -21,8 +21,8 @@ export class AppComponent implements OnInit{
 
   //smart component
   // ! -> cant be null
-  memos!: DisplayedMemo[];
-  startmemos!: DisplayedMemo[];
+  allMemos!: DisplayedMemo[];
+  startMemos!: DisplayedMemo[];
   activeMemos!: DisplayedMemo[];
   finishedMemos!: DisplayedMemo[];
 
@@ -30,8 +30,8 @@ export class AppComponent implements OnInit{
   //DI for MemoService
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
 
-    this.memos = [];
-    this.startmemos = [];
+    this.allMemos = [];
+    this.startMemos = [];
     this.activeMemos = [];
     this.finishedMemos = [];
 
@@ -56,11 +56,11 @@ export class AppComponent implements OnInit{
 
   //API http data request
   async GetAllMemos(){
-    this.httpMemoService.GetAllMemos().subscribe((data: Memo[]) => {
+    this.httpMemoService.GetAllMemos().subscribe( (data: Memo[]) => {
 
       //this.memos = CreateDisplayedMemos(this.memos, data);
-      this.startmemos = CreateDisplayedMemos(this.startmemos, data);
-      //sortMemos([this.startmemos,this.activeMemos,this.finishedMemos],this.memos)
+      this.allMemos = CreateDisplayedMemos(this.allMemos, data);
+      [this.startMemos, this.activeMemos, this.finishedMemos] = SortMemos([this.startMemos,this.activeMemos,this.finishedMemos],this.allMemos)
     });
   }
 

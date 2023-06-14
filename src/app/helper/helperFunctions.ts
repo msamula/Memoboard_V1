@@ -46,33 +46,32 @@ export function CreateDisplayedMemos(existingMemos: DisplayedMemo[], incomingMem
   return results;
 }
 
-/*export function sortMemos(memoLists: DisplayedMemo[][], incomingMemos: DisplayedMemo[]){
+export function SortMemos(memoLists: DisplayedMemo[][], incomingMemos: DisplayedMemo[]){
 
-  for (let h = 0; h <incomingMemos.length; h++) {
-    for (let i = memoLists.length-1 ; i <= 0; i--) {
+  let temp: DisplayedMemo[] = incomingMemos;
+  let tempList: DisplayedMemo[][] = [[],[],[]];
+
+  for (let k = 0; k < incomingMemos.length; k++) {
+
+    for (let i = 0 ; i < memoLists.length; i++) {
+
       for (let j = 0; j < memoLists[i].length; j++) {
-        if(memoLists[i][j].id === incomingMemos[h].id){
 
-          let index = memoLists[i].indexOf(memoLists[i][j], 0);
-          if (index > -1) {
-            memoLists[i].splice(index, 1);
-          }
+        if(memoLists[i][j].id === incomingMemos[k].id){
 
-          memoLists[i].push(incomingMemos[h]);
-
-          index = incomingMemos.indexOf(incomingMemos[h], 0);
-          if (index > -1) {
-            incomingMemos.splice(index, 1);
-          }
+          tempList[i].push(incomingMemos[k]);
+          temp = temp.filter(item => item != incomingMemos[k]);
         }
       }
     }
   }
-  console.log(incomingMemos);
-  if(incomingMemos.length > 0)
+
+  if(temp.length > 0)
   {
-    for (let i = 0; i < incomingMemos.length; i++) {
-      memoLists[0].push(incomingMemos[i]);
+    for (let i = 0; i < temp.length; i++) {
+      tempList[0].push(temp[i]);
     }
   }
-}*/
+
+  return [tempList[0],tempList[1],tempList[2]];
+}
