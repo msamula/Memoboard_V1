@@ -68,11 +68,12 @@ label{
 }
 
 .myList {
+  max-height:var(--height);
   border: solid 1px #000;
   display: block;
   border-radius: 25px;
   background-color: white;
-  overflow:hidden;
+  overflow-y:auto;
 }
 
 
@@ -88,6 +89,27 @@ label{
   100% {
     box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
   }
+}
+
+/* width */
+::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+/* Track - Schiene */
+::-webkit-scrollbar-track {
+  visibility: hidden;
+}
+
+/* Handle Balken*/
+::-webkit-scrollbar-thumb {
+
+  visibility: hidden;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  visibility: hidden;
 }
 
 
