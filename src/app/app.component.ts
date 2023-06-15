@@ -51,7 +51,10 @@ export class AppComponent implements OnInit{
       this.GetAllMemos();
     });
 
-    this.GetAllMemos();
+    this.httpMemoService.VerifyUser('Karol','Pazur1900!').subscribe((data:string)=>{
+      console.log(data);
+    });
+    //this.GetAllMemos();
   }
 
   //API http data request

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {Memo} from "../models/models";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 const _url = 'https://localhost:7296/api';
@@ -12,23 +12,38 @@ const _url = 'https://localhost:7296/api';
 
 export class HttpMemoService {
 
-  constructor(private http: HttpClient) {}
+  token: string;
+  headers: HttpHeaders;
+
+  constructor(private http: HttpClient) {
+    this.token = "";
+    this.headers = new HttpHeaders();
+    //this.headers = this.headers.set('Authorization', `Bearer ${this.token}`);
+  }
 
   //Observable for async
+
+  VerifyUser(username: string, passwort: string): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+    return this.http.post(`${_url}/User/Verify`,`{"userName": "${username}", "password": "${passwort}"}`,httpOptions);
+  }
+
   GetAllMemos() : Observable<Memo[]>  {
-    return this.http.get<Memo[]>(`${_url}/Memo/GetAllMemos`);
+    return this.http.get<Memo[]>(`${_url}/Memo/GetAllMemos`,{headers:this.headers});
   }
 
   CreateMemo(username: string, message: string): Observable<any>{
-    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{observe: "response"});
+    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{headers: this.headers,observe: "response"});
   }
 
   ChangeMemoMessage(memoID: number, newMessage: string): Observable<any>{
-    return this.http.put(`${_url}/Memo/ChangeMessage/${memoID}?newMemoMessage=${newMessage}`,null);
+    return this.http.put(`${_url}/Memo/ChangeMessage/${memoID}?newMemoMessage=${newMessage}`,null, {headers: this.headers});
   }
 
   DeleteMemo(memoID: number): Observable<any>{
-    return this.http.delete(`${_url}/Memo/DeleteMemo/${memoID}`);
+    return this.http.delete(`${_url}/Memo/DeleteMemo/${memoID}`,{headers: this.headers});
   }
 }
 
