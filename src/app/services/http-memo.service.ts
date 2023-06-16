@@ -12,38 +12,36 @@ const _url = 'https://localhost:7296/api';
 
 export class HttpMemoService {
 
-  token: string;
-  headers: HttpHeaders;
+  tokenHeader: HttpHeaders;
 
   constructor(private http: HttpClient) {
-    this.token = "";
-    this.headers = new HttpHeaders();
-    //this.headers = this.headers.set('Authorization', `Bearer ${this.token}`);
+    this.tokenHeader = new HttpHeaders();
   }
 
   //Observable for async
-
   VerifyUser(username: string, passwort: string): Observable<any>{
-    let httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
-    return this.http.post(`${_url}/User/Verify`,`{"userName": "${username}", "password": "${passwort}"}`,httpOptions);
+    return this.http.post(`${_url}/User/Verify`,`{"userName": "${username}", "password": "${passwort}"}`, {headers: {'Content-Type': 'application/json'}});
   }
 
   GetAllMemos() : Observable<Memo[]>  {
-    return this.http.get<Memo[]>(`${_url}/Memo/GetAllMemos`,{headers:this.headers});
+    return this.http.get<Memo[]>(`${_url}/Memo/GetAllMemos`,{headers: this.tokenHeader});
   }
 
   CreateMemo(username: string, message: string): Observable<any>{
-    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{headers: this.headers,observe: "response"});
+    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{headers: this.tokenHeader,observe: "response"});
   }
 
   ChangeMemoMessage(memoID: number, newMessage: string): Observable<any>{
-    return this.http.put(`${_url}/Memo/ChangeMessage/${memoID}?newMemoMessage=${newMessage}`,null, {headers: this.headers});
+    return this.http.put(`${_url}/Memo/ChangeMessage/${memoID}?newMemoMessage=${newMessage}`,null, {headers: this.tokenHeader});
   }
 
   DeleteMemo(memoID: number): Observable<any>{
-    return this.http.delete(`${_url}/Memo/DeleteMemo/${memoID}`,{headers: this.headers});
+    return this.http.delete(`${_url}/Memo/DeleteMemo/${memoID}`,{headers: this.tokenHeader});
+  }
+
+  SetTokenHeader(token: string)
+  {
+    this.tokenHeader = this.tokenHeader.set('Authorization', `Bearer ${token}`);
   }
 }
 

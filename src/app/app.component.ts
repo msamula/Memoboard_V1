@@ -51,17 +51,16 @@ export class AppComponent implements OnInit{
       this.GetAllMemos();
     });
 
-    this.httpMemoService.VerifyUser('Karol','Pazur1900!').subscribe((data:string)=>{
-      console.log(data);
+    this.httpMemoService.VerifyUser('Micha','hass88').subscribe((data:any)=>{
+      this.httpMemoService.SetTokenHeader(data);
+      this.GetAllMemos();
     });
-    //this.GetAllMemos();
   }
 
   //API http data request
-  async GetAllMemos(){
+  GetAllMemos(){
     this.httpMemoService.GetAllMemos().subscribe( (data: Memo[]) => {
 
-      //this.memos = CreateDisplayedMemos(this.memos, data);
       this.allMemos = CreateDisplayedMemos(this.allMemos, data);
       [this.startMemos, this.activeMemos, this.finishedMemos] = SortMemos([this.startMemos,this.activeMemos,this.finishedMemos],this.allMemos)
     });
