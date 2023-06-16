@@ -19,8 +19,8 @@ export class HttpMemoService {
   }
 
   //Observable for async
-  VerifyUser(username: string, passwort: string): Observable<any>{
-    return this.http.post(`${_url}/User/Verify`,`{"userName": "${username}", "password": "${passwort}"}`, {headers: {'Content-Type': 'application/json'}});
+  VerifyUser(body: any): Observable<any>{
+    return this.http.post(`${_url}/User/Verify`,body, {headers: {'Content-Type': 'application/json'}});
   }
 
   GetAllMemos() : Observable<Memo[]>  {

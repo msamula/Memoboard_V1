@@ -14,6 +14,7 @@ import {MemoModule} from "./memo/memo.module";
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
+import {LoginModule} from "./login/login.module";
 
 
 
@@ -39,7 +40,8 @@ import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
     CdkDropList,
 
     //import the MemoModule
-    MemoModule
+    MemoModule,
+    LoginModule
   ],
 
   //add services here under providers

@@ -51,10 +51,10 @@ export class AppComponent implements OnInit{
       this.GetAllMemos();
     });
 
-    this.httpMemoService.VerifyUser('Micha','hass88').subscribe((data:any)=>{
-      this.httpMemoService.SetTokenHeader(data);
-      this.GetAllMemos();
-    });
+  /*    this.httpMemoService.VerifyUser('Micha','hass88').subscribe((data:any)=>{
+        this.httpMemoService.SetTokenHeader(data);
+        this.GetAllMemos();
+      });*/
   }
 
   //API http data request

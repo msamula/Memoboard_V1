@@ -1,0 +1,29 @@
+.login{
+  position: absolute;
+  top: 8%;
+  left: 37%;
+
+  padding: 2%;
+  z-index: 10000;
+  border-radius: 25px;
+  background-color: var(--firstColor);
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
+}
+
+input{
+  margin-top: 2%;
+}
+
+.title{
+  display: block;
+  text-align: center;
+  font-size: 25px;
+  font-weight: lighter;
+  color: white;
+}
+
+.center{
+  margin-top: 4%;
+  display: flex;
+  justify-content: center;
+}
