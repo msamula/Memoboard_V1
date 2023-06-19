@@ -3,6 +3,7 @@ import {NgForm} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {HttpMemoService} from "../services/http-memo.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {SharedService} from "../services/shared.service";
 
 
 @Component({
@@ -90,7 +91,7 @@ export class LoginComponent {
     this._confirmPassword = value;
   }
 
-  constructor(private httpMemoService: HttpMemoService) {
+  constructor(private httpMemoService: HttpMemoService, private sharedService: SharedService) {
     this.loginTitle = `<i class="bi bi-person-circle"></i> Sign in`;
     this.hideLogin = false;
     this.hideBackground = false;
@@ -108,20 +109,23 @@ export class LoginComponent {
     this.httpMemoService.VerifyUser(thisForm.value).subscribe(
 
       (data:any)=>{
-              this.httpMemoService.SetTokenHeader(data);
+              this.httpMemoService.SetTokenHeader(data.body);
+              this.sharedService.SetUsername(this._username);
               this.closeLogin();
             },
 
       (e: HttpErrorResponse) => {
             if(e.status === 401){
                 this.animateAlert = !this.animateAlert;
-                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] Wrong password. Please try again.`;
+                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> Wrong password. Please try again.`;
             }
 
             if(e.status === 404){
               this.animateAlert = !this.animateAlert;
-              this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] Wrong username. Please try again.`;
+              this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> The user does not exist. Please try again.`;
             }
+
+            this.ClearInput();
 
             setTimeout(async ()=>{
               this.animateAlert = !this.animateAlert;
@@ -166,7 +170,7 @@ export class LoginComponent {
 
               if (e.status === 422) {
                 this.animateAlert = !this.animateAlert;
-                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] The user already exists. Please choose another username.`;
+                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> The user already exists. Please choose another username.`;
               }
 
               setTimeout(async () => {

@@ -1,8 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SignalService} from "../../services/signal.service";
 import {HttpMemoService} from "../../services/http-memo.service";
 import {HubConnectionState} from "@microsoft/signalr";
 import {HttpErrorResponse} from "@angular/common/http";
+import {SharedService} from "../../services/shared.service";
 
 @Component({
   selector: 'app-create-memo',
@@ -10,7 +11,7 @@ import {HttpErrorResponse} from "@angular/common/http";
   styleUrls: ['./create-memo.component.css']
 })
 
-export class CreateMemoComponent {
+export class CreateMemoComponent implements OnInit{
 
   private _username: string = '';
   private _message: string = '';
@@ -44,15 +45,21 @@ export class CreateMemoComponent {
   usernameDisabled: boolean;
   messageDisabled: boolean;
 
-  constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
+  constructor(private httpMemoService: HttpMemoService, private signalService: SignalService, private sharedService: SharedService) {
 
     this.conStatus =`<i class="bi bi-wifi-1"></i> ${this.signalService.connection.state}`;
     this.conColor = 'background: #ffc107;';
     this.btnDisabled = true;
-    this.usernameDisabled = false;
+    this.usernameDisabled = true;
     this.messageDisabled = false;
 
     this.ShowSignalRStatus();
+  }
+
+  ngOnInit(): void {
+    //lazyloading einbauen
+    //usernameDisabled ausbauen
+    this._username = this.sharedService.GetUsername();
   }
 
   @Output()
@@ -84,7 +91,7 @@ export class CreateMemoComponent {
         })
         .add(()=>{
           this.signalService.UpdateMemoboard();
-          this.usernameDisabled = true;
+          //this.usernameDisabled = true;
           this._message = "";
         });
     }
