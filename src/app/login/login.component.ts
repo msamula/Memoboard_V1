@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {HttpMemoService} from "../services/http-memo.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -17,10 +18,25 @@ import {HttpMemoService} from "../services/http-memo.service";
         })),
 
       state('closed',
-        style({ transform: 'translateY(-150%)' })),
+        style({ transform: 'translateY(-150%)'})),
 
       transition('start <=> closed', [
         animate('0.2s')
+      ])
+    ]),
+
+    trigger('closeBackground', [
+
+      state('start',
+        style({
+          // normal style
+        })),
+
+      state('closed',
+        style({ opacity: 0 })),
+
+      transition('start <=> closed', [
+        animate('0.4s')
       ])
     ])
   ]
@@ -28,9 +44,14 @@ import {HttpMemoService} from "../services/http-memo.service";
 export class LoginComponent {
 
   hideLogin: boolean;
+  hideBackground: boolean;
   animateClosing: boolean;
-  disableSubmit: boolean;
+  animateClosedBG: boolean;
 
+  alertMessage: string;
+  animateAlert: boolean;
+
+  disableSubmit: boolean;
 
   private _username: string = "";
   private _password: string = "";
@@ -55,22 +76,48 @@ export class LoginComponent {
 
   constructor(private httpMemoService: HttpMemoService) {
     this.hideLogin = false;
+    this.hideBackground = false;
     this.disableSubmit = false;
     this.animateClosing = false;
+    this.animateClosedBG = false;
+    this.animateAlert = false;
+    this.alertMessage = "";
   }
 
   onSubmit(thisForm: NgForm) {
-    this.httpMemoService.VerifyUser(thisForm.value).subscribe((data:any)=>{
-      this.httpMemoService.SetTokenHeader(data);
-    });
+    this.httpMemoService.VerifyUser(thisForm.value).subscribe(
 
-    this.closeLogin();
+      (data:any)=>{
+              this.httpMemoService.SetTokenHeader(data);
+              this.closeLogin();
+            },
+
+      (e: HttpErrorResponse) => {
+            if(e.status === 401){
+                this.animateAlert = !this.animateAlert;
+                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] Wrong password. Please try again.`;
+            }
+
+            if(e.status === 404){
+              this.animateAlert = !this.animateAlert;
+              this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] Wrong username. Please try again.`;
+            }
+
+            setTimeout(async ()=>{
+              this.animateAlert = !this.animateAlert;
+            },5000);
+      }
+    );
   }
 
   closeLogin() {
     this.animateClosing = true;
     setTimeout(async ()=>{
       this.hideLogin = true;
-    },500);
+      this.animateClosedBG = true;
+    },200);
+    setTimeout(async ()=>{
+      this.hideBackground = true;
+    },600);
   }
 }

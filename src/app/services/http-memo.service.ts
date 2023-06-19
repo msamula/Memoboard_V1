@@ -20,7 +20,7 @@ export class HttpMemoService {
 
   //Observable for async
   VerifyUser(body: any): Observable<any>{
-    return this.http.post(`${_url}/User/Verify`,body, {headers: {'Content-Type': 'application/json'}});
+    return this.http.post(`${_url}/User/Verify`,body, {headers: {'Content-Type': 'application/json'},observe: "response"});
   }
 
   GetAllMemos() : Observable<Memo[]>  {
