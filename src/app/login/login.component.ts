@@ -43,6 +43,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class LoginComponent {
 
+  loginTitle: string;
+
   hideLogin: boolean;
   hideBackground: boolean;
   animateClosing: boolean;
@@ -51,10 +53,15 @@ export class LoginComponent {
   alertMessage: string;
   animateAlert: boolean;
 
+  createUser: boolean;
+  confirmCreate: boolean;
+  created: boolean;
+
   disableSubmit: boolean;
 
   private _username: string = "";
   private _password: string = "";
+  private _confirmPassword: string = "";
 
 
   get username(): string {
@@ -74,7 +81,17 @@ export class LoginComponent {
     this._password = value;
   }
 
+  get confirmPassword(): string {
+    (this._password.trim().length < 4 || this._username.trim().length < 3 || this._password !== this._confirmPassword) ? this.confirmCreate = true : this.confirmCreate = false;
+    return this._confirmPassword;
+  }
+
+  set confirmPassword(value: string) {
+    this._confirmPassword = value;
+  }
+
   constructor(private httpMemoService: HttpMemoService) {
+    this.loginTitle = `<i class="bi bi-person-circle"></i> Sign in`;
     this.hideLogin = false;
     this.hideBackground = false;
     this.disableSubmit = false;
@@ -82,6 +99,9 @@ export class LoginComponent {
     this.animateClosedBG = false;
     this.animateAlert = false;
     this.alertMessage = "";
+    this.createUser = false;
+    this.confirmCreate = true;
+    this.created = false;
   }
 
   onSubmit(thisForm: NgForm) {
@@ -119,5 +139,46 @@ export class LoginComponent {
     setTimeout(async ()=>{
       this.hideBackground = true;
     },600);
+  }
+
+  ShowRegistration() {
+    this.createUser = !this.createUser;
+    this.loginTitle == `<i class="bi bi-person-circle"></i> Sign up`
+      ? this.loginTitle = `<i class="bi bi-person-circle"></i> Sign in`
+      : this.loginTitle = `<i class="bi bi-person-circle"></i> Sign up`;
+
+    this.ClearInput();
+  }
+
+  RegisterUser(thisForm: NgForm) {
+
+    this.httpMemoService.RegisterUser(thisForm.value).subscribe(
+      () =>{
+        this.ClearInput();
+        this.ShowRegistration();
+        this.created = !this.created;
+
+        setTimeout(async () => {
+          this.created = !this.created;
+        }, 5000);
+      },
+      (e: HttpErrorResponse) => {
+
+              if (e.status === 422) {
+                this.animateAlert = !this.animateAlert;
+                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> [${e.status}] The user already exists. Please choose another username.`;
+              }
+
+              setTimeout(async () => {
+                this.animateAlert = !this.animateAlert;
+              }, 5000);
+            }
+    );
+  }
+
+  ClearInput(){
+    this.username = '';
+    this.password = '';
+    this.confirmPassword = '';
   }
 }

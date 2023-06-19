@@ -19,6 +19,11 @@ export class HttpMemoService {
   }
 
   //Observable for async
+
+  RegisterUser(body: any): Observable<any>{
+      return this.http.post(`${_url}/User/Register`,body, {headers: {'Content-Type': 'application/json'},observe: "response"});
+  }
+
   VerifyUser(body: any): Observable<any>{
     return this.http.post(`${_url}/User/Verify`,body, {headers: {'Content-Type': 'application/json'},observe: "response"});
   }
