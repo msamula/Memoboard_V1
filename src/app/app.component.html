@@ -14,6 +14,7 @@
         <app-memo-list
           *ngFor="let memo of startMemos;"
           [inputMemo]= "memo"
+          [loggedUser]="loggedUser"
           (remove)="handleDelete($event)"
           (confirmChange)="handleChange($event)">
         </app-memo-list>
@@ -27,6 +28,7 @@
       <app-memo-list
         *ngFor="let memo of activeMemos;"
         [inputMemo]= "memo"
+        [loggedUser]="loggedUser"
         (remove)="handleDelete($event)"
         (confirmChange)="handleChange($event)">
       </app-memo-list>
@@ -39,6 +41,7 @@
       <app-memo-list
         *ngFor="let memo of finishedMemos;"
         [inputMemo]= "memo"
+        [loggedUser]="loggedUser"
         (remove)="handleDelete($event)"
         (confirmChange)="handleChange($event)">
       </app-memo-list>

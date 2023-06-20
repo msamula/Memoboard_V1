@@ -76,6 +76,8 @@ export class MemoListComponent implements OnInit{
     //inputMemo -> pass data down (memo from *ngFor="let memo of memos;" from app.component.ts)
     @Input()
     inputMemo!: DisplayedMemo;
+    @Input()
+    loggedUser!: string;
 
     //output -> pass data up with events
     @Output()

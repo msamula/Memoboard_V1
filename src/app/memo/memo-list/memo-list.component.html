@@ -17,8 +17,8 @@
     </div>
 
     <div class="btn-group" role="group">
-      <button *ngIf="(!createNewMessage && iSaw)" title="edit message" class="btn btn-sm btn-outline-dark" (click)="OnChange()"><i class="bi bi-pencil-square"></i></button>
-      <button *ngIf="(!createNewMessage && iSaw)" title="delete memo in database" class="btn btn-sm btn-danger" (click)="OnRemove()"><i class="bi bi-trash"></i></button>
+      <button *ngIf="(!createNewMessage && iSaw && ((inputMemo.user.userName === loggedUser) || (loggedUser === 'Admin')))" title="edit message" class="btn btn-sm btn-outline-dark" (click)="OnChange()"><i class="bi bi-pencil-square"></i></button>
+      <button *ngIf="(!createNewMessage && iSaw && ((inputMemo.user.userName === loggedUser) || (loggedUser === 'Admin')))" title="delete memo in database" class="btn btn-sm btn-danger" (click)="OnRemove()"><i class="bi bi-trash"></i></button>
     </div>
 
     <button *ngIf="(!iSaw)" title="click if you saw this memo" class="btn btn-sm btn-dark" (click)="iSawMemo()"><i class="bi bi-eye"></i></button>

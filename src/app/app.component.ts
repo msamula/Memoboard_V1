@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
   showBtn: boolean;
 
   usernameIsSet: boolean;
+  loggedUser: string;
 
   //smart component
   // ! -> cant be null
@@ -42,6 +43,7 @@ export class AppComponent implements OnInit{
     this.showBtn = false;
 
     this.usernameIsSet = false;
+    this.loggedUser = '';
   }
 
   // before the actual page load -> lifecycle method of angular
@@ -58,7 +60,10 @@ export class AppComponent implements OnInit{
       this.usernameIsSet = this.sharedService.usernameIsSet;
 
       if(this.usernameIsSet){
+
         clearInterval(awaitLoginInterval);
+
+        this.loggedUser = this.sharedService.GetUsername();
 
         //set the height of the boundary
         SetBoundarySize();
