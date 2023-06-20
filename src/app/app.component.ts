@@ -6,6 +6,7 @@ import {CreateDisplayedMemos, SetBoundarySize, SortMemos} from "./helper/helperF
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
+import {SharedService} from "./services/shared.service";
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,8 @@ export class AppComponent implements OnInit{
   showCreateMemo: boolean;
   showBtn: boolean;
 
+  usernameIsSet: boolean;
+
   //smart component
   // ! -> cant be null
   allMemos!: DisplayedMemo[];
@@ -28,7 +31,7 @@ export class AppComponent implements OnInit{
 
 
   //DI for MemoService
-  constructor(private httpMemoService: HttpMemoService, private signalService: SignalService) {
+  constructor(private httpMemoService: HttpMemoService, private signalService: SignalService, private sharedService: SharedService) {
 
     this.allMemos = [];
     this.startMemos = [];
@@ -37,24 +40,32 @@ export class AppComponent implements OnInit{
 
     this.showCreateMemo = true;
     this.showBtn = false;
+
+    this.usernameIsSet = false;
   }
 
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
 
-    //set the height of the boundary
-    SetBoundarySize();
-
     // "UpdateMemoboard" -> "key" from signalR API
     this.signalService.connection.on("UpdateMemoboard",() => {
       this.GetAllMemos();
     });
 
-  /*    this.httpMemoService.VerifyUser('Micha','hass88').subscribe((data:any)=>{
-        this.httpMemoService.SetTokenHeader(data);
+    let awaitLoginInterval = setInterval(async ()=>{
+
+      this.usernameIsSet = this.sharedService.usernameIsSet;
+
+      if(this.usernameIsSet){
+        clearInterval(awaitLoginInterval);
+
+        //set the height of the boundary
+        SetBoundarySize();
+
         this.GetAllMemos();
-      });*/
+      }
+    },500);
   }
 
   //API http data request

@@ -5,18 +5,20 @@ import { Injectable } from '@angular/core';
 })
 export class SharedService {
 
+  usernameIsSet: boolean;
   username: string;
 
   constructor() {
-    this.username = 'Micha';
+    this.username = '';
+    this.usernameIsSet = false;
   }
 
   SetUsername(input: string){
     this.username = input;
+    this.usernameIsSet = true;
   }
 
   GetUsername(){
     return this.username;
   }
-
 }
