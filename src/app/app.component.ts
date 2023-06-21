@@ -55,6 +55,10 @@ export class AppComponent implements OnInit{
       this.GetAllMemos();
     });
 
+    this.signalService.connection.on("UserCount",(userCount: number) => {
+      console.log(userCount);
+    });
+
     let awaitLoginInterval = setInterval(async ()=>{
 
       this.usernameIsSet = this.sharedService.usernameIsSet;
