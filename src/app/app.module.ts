@@ -15,6 +15,7 @@ import {LoginModule} from "./login/login.module";
 // services for providers
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
+import {InfoModule} from "./info/info.module";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {SignalService} from "./services/signal.service";
 
     //import the MemoModule
     MemoModule,
-    LoginModule
+    LoginModule,
+    InfoModule
   ],
 
   //add services here under providers

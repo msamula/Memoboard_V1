@@ -23,6 +23,8 @@ export class AppComponent implements OnInit{
   usernameIsSet: boolean;
   loggedUser: string;
 
+  userCounter: number;
+
   //smart component
   // ! -> cant be null
   allMemos!: DisplayedMemo[];
@@ -44,6 +46,8 @@ export class AppComponent implements OnInit{
 
     this.usernameIsSet = false;
     this.loggedUser = '';
+
+    this.userCounter = 0;
   }
 
   // before the actual page load -> lifecycle method of angular
@@ -56,7 +60,7 @@ export class AppComponent implements OnInit{
     });
 
     this.signalService.connection.on("UserCount",(userCount: number) => {
-      console.log(userCount);
+      this.userCounter = userCount;
     });
 
     let awaitLoginInterval = setInterval(async ()=>{
