@@ -71,7 +71,7 @@ export class LoginComponent {
   }
 
   set username(value: string) {
-    this._username = value;
+    this._username = value.trim();
   }
   get password(): string {
     (this._password.trim().length < 4 || this._username.trim().length < 3) ? this.disableSubmit = true : this.disableSubmit = false;

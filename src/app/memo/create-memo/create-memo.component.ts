@@ -57,8 +57,6 @@ export class CreateMemoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    //lazyloading einbauen
-    //usernameDisabled ausbauen
     this._username = this.sharedService.GetUsername();
   }
 
