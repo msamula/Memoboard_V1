@@ -44,22 +44,28 @@ import {SharedService} from "../services/shared.service";
 })
 export class LoginComponent {
 
-  loginTitle: string;
+  /*shows 'Sign up' or 'Sign in'*/
+  windowTitle: string;
 
+  /*for login animation*/
   hideLogin: boolean;
   hideBackground: boolean;
-  animateClosing: boolean;
-  animateClosedBG: boolean;
+  animateClosingLogin: boolean;
+  animateClosedBackground: boolean;
 
+  /*for alerts*/
   alertMessage: string;
   animateAlert: boolean;
 
+  /*Register new user*/
   createUser: boolean;
   confirmCreate: boolean;
-  created: boolean;
+  userCreatedInfo: boolean;
 
+  /*Login button*/
   disableSubmit: boolean;
 
+  /*Input fields START*/
   private _username: string = "";
   private _password: string = "";
   private _confirmPassword: string = "";
@@ -91,93 +97,99 @@ export class LoginComponent {
     this._confirmPassword = value;
   }
 
+  /*Input fields END*/
+
   constructor(private httpMemoService: HttpMemoService, private sharedService: SharedService) {
-    this.loginTitle = `<i class="bi bi-person-circle"></i> Sign in`;
+    this.windowTitle = `<i class="bi bi-person-circle"></i> Sign in`;
+
     this.hideLogin = false;
     this.hideBackground = false;
-    this.disableSubmit = false;
-    this.animateClosing = false;
-    this.animateClosedBG = false;
+    this.animateClosingLogin = false;
+    this.animateClosedBackground = false;
+
     this.animateAlert = false;
     this.alertMessage = "";
+
     this.createUser = false;
     this.confirmCreate = true;
-    this.created = false;
+    this.userCreatedInfo = false;
+
+    this.disableSubmit = false;
   }
 
-  onSubmit(thisForm: NgForm) {
+  VerifyUser(thisForm: NgForm) {
     this.httpMemoService.VerifyUser(thisForm.value).subscribe(
 
       (data:any)=>{
               this.httpMemoService.SetTokenHeader(data.body);
               this.sharedService.SetUsername(this._username);
-              this.closeLogin();
+              this.CloseLogin();
             },
 
       (e: HttpErrorResponse) => {
             if(e.status === 401){
-                this.animateAlert = !this.animateAlert;
-                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> Wrong password. Please try again.`;
+              this.ShowAlert('Wrong password. Please try again.');
             }
 
             if(e.status === 404){
-              this.animateAlert = !this.animateAlert;
-              this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> The user does not exist. Please try again.`;
+              this.ShowAlert('The user does not exist. Please try again.');
             }
 
             this.ClearInput();
-
-            setTimeout(async ()=>{
-              this.animateAlert = !this.animateAlert;
-            },5000);
       }
     );
   }
 
-  closeLogin() {
-    this.animateClosing = true;
+  RegisterUser(thisForm: NgForm) {
+    this.httpMemoService.RegisterUser(thisForm.value).subscribe(
+      () =>{
+
+        this.ClearInput();
+        this.ShowOrHideRegistration();
+
+        this.userCreatedInfo = !this.userCreatedInfo;
+        setTimeout(async () => {
+          this.userCreatedInfo = !this.userCreatedInfo;
+        }, 5000);
+      },
+      (e: HttpErrorResponse) => {
+
+        if (e.status === 422) {
+          this.ShowAlert('The user already exists. Please choose another username.');
+        }
+      }
+    );
+  }
+
+  CloseLogin() {
+    this.animateClosingLogin = true;
+
     setTimeout(async ()=>{
       this.hideLogin = true;
-      this.animateClosedBG = true;
+      this.animateClosedBackground = true;
     },200);
+
     setTimeout(async ()=>{
       this.hideBackground = true;
     },600);
   }
 
-  ShowRegistration() {
+  ShowOrHideRegistration() {
     this.createUser = !this.createUser;
-    this.loginTitle == `<i class="bi bi-person-circle"></i> Sign up`
-      ? this.loginTitle = `<i class="bi bi-person-circle"></i> Sign in`
-      : this.loginTitle = `<i class="bi bi-person-circle"></i> Sign up`;
+    this.windowTitle == `<i class="bi bi-person-circle"></i> Sign up`
+      ? this.windowTitle = `<i class="bi bi-person-circle"></i> Sign in`
+      : this.windowTitle = `<i class="bi bi-person-circle"></i> Sign up`;
 
     this.ClearInput();
   }
 
-  RegisterUser(thisForm: NgForm) {
+  ShowAlert(alertMessage: string){
+    this.animateAlert = !this.animateAlert;
+    this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> ${alertMessage}`;
 
-    this.httpMemoService.RegisterUser(thisForm.value).subscribe(
-      () =>{
-        this.ClearInput();
-        this.ShowRegistration();
-        this.created = !this.created;
-
-        setTimeout(async () => {
-          this.created = !this.created;
-        }, 5000);
-      },
-      (e: HttpErrorResponse) => {
-
-              if (e.status === 422) {
-                this.animateAlert = !this.animateAlert;
-                this.alertMessage = `<i class="bi bi-exclamation-triangle-fill"></i> The user already exists. Please choose another username.`;
-              }
-
-              setTimeout(async () => {
-                this.animateAlert = !this.animateAlert;
-              }, 5000);
-            }
-    );
+    setTimeout(async ()=>{
+      this.animateAlert = !this.animateAlert;
+    },5000);
   }
 
   ClearInput(){

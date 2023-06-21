@@ -5,7 +5,7 @@
   left: 0;
   top: 0;
 
-  background: rgba(255, 111, 60, 1);
+  background-color: var(--secondColor);
   z-index: 9999;
 }
 
@@ -27,18 +27,14 @@
   border-color: transparent;
 }
 
-.created{
+.userCreatedInfo{
   position: absolute;
   top: 0px;
   width: 100%;
   text-align: center;
   color: var(--fourthColor);
-  background-color: #198754;
+  background-color: var(--fifthColor);
   border-color: transparent;
-}
-
-input{
-  margin-top: 2%;
 }
 
 .title{
@@ -49,7 +45,11 @@ input{
   color: white;
 }
 
-.center{
+input{
+  margin-top: 2%;
+}
+
+.centerButtons{
   margin-top: 4%;
   display: flex;
   justify-content: center;
