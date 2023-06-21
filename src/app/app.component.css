@@ -44,12 +44,9 @@
   z-index: 100;
   min-width: 154px;
   cursor: move;
-  background-color: var(--firstColor);
+  background-color: var(--sixthColor);
   border-radius: 25px;
-}
-
-.createMemo:active{
-  opacity: 0.9;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
 }
 
 .bi-file-earmark-plus{

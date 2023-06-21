@@ -9,7 +9,7 @@
   <div class="card-body">
     <p *ngIf="!createNewMessage" class="card-text">{{inputMemo.message}}</p>
 
-    <input *ngIf="createNewMessage" type="text" class="form-control" [(ngModel)]="newMessageInput">
+    <input *ngIf="createNewMessage" type="text" class="form-control" [(ngModel)]="newMessageInput" (mousedown)="$event.stopPropagation()">
 
     <div class="btn-group" role="group">
       <button *ngIf="createNewMessage" title="cancel new message" class="btn btn-sm btn-danger" (click)="OnChange()"><i class="bi bi-x-square"></i></button>
