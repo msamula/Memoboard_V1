@@ -17,6 +17,7 @@ export function CreateDisplayedMemos(existingMemos: DisplayedMemo[], incomingMem
     memo.id = incomingMemos[i].id;
     memo.user = incomingMemos[i].user;
     memo.message = incomingMemos[i].message;
+
     memo.isDifferent = false;
     memo.isNew = false;
 
@@ -46,7 +47,7 @@ export function CreateDisplayedMemos(existingMemos: DisplayedMemo[], incomingMem
   return results;
 }
 
-export function SortMemos(memoLists: DisplayedMemo[][], incomingMemos: DisplayedMemo[]){
+export function SortMemosToLists(memoLists: DisplayedMemo[][], incomingMemos: DisplayedMemo[]){
 
   let temp: DisplayedMemo[] = incomingMemos;
   let tempList: DisplayedMemo[][] = [[],[],[]];

@@ -89,7 +89,6 @@ export class CreateMemoComponent implements OnInit{
         })
         .add(()=>{
           this.signalService.UpdateMemoboard();
-          //this.usernameDisabled = true;
           this._message = "";
         });
     }

@@ -9,7 +9,9 @@
 }
 
 .boundary {
-  width:  100%;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 700px;
   height: var(--height);
   border-color: transparent;
   border-radius: 25px;
@@ -110,6 +112,24 @@ label{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   visibility: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+  .boundary {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1500px){
+  .boundary {
+    width: 95%;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  .boundary {
+    width: 80%;
+  }
 }
 
 

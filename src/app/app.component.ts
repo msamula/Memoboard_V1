@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DisplayedMemo, Memo} from "./models/models";
-import {CreateDisplayedMemos, SetBoundarySize, SortMemos} from "./helper/helperFunctions";
+import {CreateDisplayedMemos, SetBoundarySize, SortMemosToLists} from "./helper/helperFunctions";
 
 import {HttpMemoService} from "./services/http-memo.service";
 import {SignalService} from "./services/signal.service";
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit{
     this.httpMemoService.GetAllMemos().subscribe( (data: Memo[]) => {
 
       this.allMemos = CreateDisplayedMemos(this.allMemos, data);
-      [this.startMemos, this.activeMemos, this.finishedMemos] = SortMemos([this.startMemos,this.activeMemos,this.finishedMemos],this.allMemos)
+      [this.startMemos, this.activeMemos, this.finishedMemos] = SortMemosToLists([this.startMemos,this.activeMemos,this.finishedMemos],this.allMemos)
     });
   }
 
