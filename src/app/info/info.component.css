@@ -1,21 +1,19 @@
-.counter{
-    display: flex;
-    justify-content: center;
-
+.infoBoxButton{
     position: absolute;
-    top: 15vh;
-    left: 3vh;
+    top: 12vh;
+    left: 12vh;
 
-    width: 100px;
-    height: 50px;
-    padding-right: 10px;
-    padding-left: 10px;
-    border-radius: 25px;
+    width: 80px;
+    height: 80px;
+
+    border: 0px;
+    border-radius: 50px;
+    z-index: 100;
 
     font-size: 35px;
     color: var(--fourthColor);
     background-color: var(--sixthColor);
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
 
-    z-index: 100;
+    cursor: move;
 }

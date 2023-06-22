@@ -1,4 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbOffcanvas} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-info',
@@ -6,16 +7,26 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./info.component.css']
 })
 export class InfoComponent implements OnInit{
-    logo: string;
+
+    hideButton: boolean;
 
     @Input()
-    userCountInput!: number;
+    userList!: [];
 
-    constructor() {
-      this.logo = `<i class="bi bi-person-circle"></i>&nbsp;&nbsp;&nbsp;`;
+    constructor(private offcanvasService: NgbOffcanvas) {
+      this.hideButton = false;
     }
 
     ngOnInit(): void {
+    }
 
+    openInfobox(content: any) {
+      this.hideButton = !this.hideButton;
+      this.offcanvasService.open(content);
+    }
+
+    closeInfobox(){
+      this.hideButton = !this.hideButton;
+      this.offcanvasService.dismiss();
     }
 }

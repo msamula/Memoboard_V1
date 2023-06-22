@@ -1,4 +1,21 @@
-<div title="visitors" class="counter" cdkDrag>
-  <p [innerHTML]="logo"></p>
-  <p [innerHTML]="userCountInput"></p>
-</div>
+<button [hidden]="hideButton" title="Memoboard info" class="infoBoxButton" cdkDrag cdkDragBoundary=".windowBoundary">
+  <i class="bi bi-info-square" style="cursor: pointer" (click)="openInfobox(infoBox)"></i>
+</button>
+
+<ng-template #infoBox>
+
+  <div class="offcanvas-header text-bg-dark">
+    <h2 class="offcanvas-title">Memoboard</h2>
+    <button type="button" class="btn-close" (click)="closeInfobox()"></button>
+  </div>
+
+  <div class="offcanvas-body text-bg-dark">
+    <h4>User online</h4>
+    <hr/>
+    <div *ngFor="let user of userList;" style="font-size: 20px; display: flex; justify-content: left">
+      <i class="bi bi-person-circle" style="margin-right: 2%"></i><span></span>
+      <p [title]="user['key']" [innerHTML]="user['value']" ></p>
+    </div>
+  </div>
+
+</ng-template>

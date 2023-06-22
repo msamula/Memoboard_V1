@@ -23,7 +23,7 @@ export class AppComponent implements OnInit{
   usernameIsSet: boolean;
   loggedUser: string;
 
-  userCounter: number;
+  userList: [];
 
   //smart component
   // ! -> cant be null
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit{
     this.usernameIsSet = false;
     this.loggedUser = '';
 
-    this.userCounter = 0;
+    this.userList = [];
   }
 
   // before the actual page load -> lifecycle method of angular
@@ -59,8 +59,8 @@ export class AppComponent implements OnInit{
       this.GetAllMemos();
     });
 
-    this.signalService.connection.on("UserCount",(userCount: number) => {
-      this.userCounter = userCount;
+    this.signalService.connection.on("UserListArray",(userList: []) => {
+      this.userList = userList;
     });
 
     let awaitLoginInterval = setInterval(async ()=>{
@@ -72,6 +72,8 @@ export class AppComponent implements OnInit{
         clearInterval(awaitLoginInterval);
 
         this.loggedUser = this.sharedService.GetUsername();
+
+        this.signalService.connection.send("AddUserToList", this.loggedUser);
 
         //set the height of the boundary
         SetBoundarySize();

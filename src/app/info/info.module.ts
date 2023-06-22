@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InfoComponent } from './info.component';
 import {FormsModule} from "@angular/forms";
 import {CdkDrag} from "@angular/cdk/drag-drop";
+import {NgbDatepickerModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 
@@ -16,7 +17,8 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
     imports: [
         CommonModule,
         FormsModule,
-        CdkDrag
+        CdkDrag,
+        NgbDatepickerModule
     ]
 })
 export class InfoModule { }
