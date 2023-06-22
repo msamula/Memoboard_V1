@@ -1,4 +1,4 @@
-.infoBoxButton{
+.infoBox{
     position: absolute;
     top: 12vh;
     left: 12vh;
@@ -6,7 +6,7 @@
     width: 80px;
     height: 80px;
 
-    border: 0px;
+    border: 0px transparent;
     border-radius: 50px;
     z-index: 100;
 
@@ -16,6 +16,10 @@
     box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
 
     cursor: move;
+}
+
+.overButton:hover{
+  color: var(--firstColor);
 }
 
 .connected{

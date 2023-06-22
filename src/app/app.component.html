@@ -1,8 +1,7 @@
 <app-login></app-login>
-<app-info [userList]="userList"></app-info>
 
 <div *ngIf="usernameIsSet" class="container windowBoundary">
-
+  <app-info [userList]="userList"></app-info>
   <button title="create a memo" class="addMemoButton" cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn"><i class="bi bi-file-earmark-plus pulseAnimation" (click)="SwitchBtnCreateMemo()" style="cursor: pointer"></i></button>
   <app-create-memo class="createMemo" (cancel)="SwitchBtnCreateMemo()" [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".windowBoundary"></app-create-memo>
 

@@ -1,5 +1,5 @@
-<button [hidden]="this.offcanvasService.hasOpenOffcanvas()" title="Memoboard info" class="infoBoxButton" cdkDrag cdkDragBoundary=".windowBoundary">
-  <i class="bi bi-info-square" style="cursor: pointer" (click)="openInfobox(infoBox)"></i>
+<button [hidden]="this.offcanvasService.hasOpenOffcanvas()" title="Memoboard info" class="infoBox" cdkDrag cdkDragBoundary=".windowBoundary">
+  <i class="bi bi-info-square overButton" style="cursor: pointer" (click)="openInfobox(infoBox)"></i>
 </button>
 
 <ng-template #infoBox>
@@ -17,10 +17,20 @@
 
     <h4>Active users</h4>
     <hr/>
+
     <div *ngFor="let user of userList;" style="font-size: 20px; display: flex; justify-content: left">
       <i class="bi bi-person-circle" style="margin-right: 2%"></i><span></span>
       <p [title]="user['key']" [innerHTML]="user['value']" ></p>
     </div>
-  </div>
 
+    <div class="text-nowrap" style="display: flex; justify-content: center; position: absolute; bottom: 0; font-size: 12px;">
+      <p style="margin-right: 10%; margin-left: 5%">
+        version 0.3.7
+      </p>
+      <p>
+        &copy; developed and designed by Michael Samula
+      </p>
+    </div>
+
+  </div>
 </ng-template>
