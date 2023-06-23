@@ -218,4 +218,31 @@ export class LoginComponent {
       this.registerButtonDisabled = true;
     }
   }
+
+  /*https://blog.angular-university.io/angular-ngclass-ngstyle/*/
+
+  validatePassword() {
+    return{
+      'form-control': true,
+      'is-valid': this.passwordChecker.test(this._password),
+      'is-invalid': !this.passwordChecker.test(this._password)
+    }
+  }
+
+  validateConfirmPassword() {
+    return{
+      'form-control': true,
+      'is-valid': this.passwordChecker.test(this._confirmPassword) && (this._password === this._confirmPassword),
+      'is-invalid': !(this.passwordChecker.test(this._confirmPassword) && (this._password === this._confirmPassword))
+    }
+  }
+
+  validateUsername() {
+    return{
+      'form-control': true,
+      'is-valid': this._username.length >= 3 ,
+      'is-invalid': this._username.length < 3
+    }
+  }
+
 }
