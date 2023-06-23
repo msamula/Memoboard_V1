@@ -1,17 +1,24 @@
 <app-login></app-login>
 
 <div *ngIf="usernameIsSet" class="container windowBoundary">
+
   <app-info [userList]="userList"></app-info>
-  <button ngbTooltip="Create a new memo." placement="right"
-          class="addMemoButton"
+
+  <button title="create a new memo" class="addMemoButton"
           cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn">
 
-    <i class="bi bi-file-earmark-plus pulseAnimation" (click)="SwitchBtnCreateMemo()" style="cursor: pointer"></i></button>
-  <app-create-memo class="createMemo" (cancel)="SwitchBtnCreateMemo()" [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".windowBoundary"></app-create-memo>
+    <i class="bi bi-file-earmark-plus pulseAnimation" (click)="SwitchBtnCreateMemo()" style="cursor: pointer"></i>
+  </button>
+
+  <app-create-memo class="createMemo" (cancel)="SwitchBtnCreateMemo()"
+                   [hidden]="showCreateMemo" cdkDrag cdkDragBoundary=".windowBoundary">
+  </app-create-memo>
 
   <div class="row text-center boundary" style="margin-top: 1%;">
 
-    <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]" [cdkDropListData]="startMemos" (cdkDropListDropped)="drop($event)" class="col myList">
+    <div cdkDropList #startList="cdkDropList" [cdkDropListConnectedTo]="[activeList,finishedList]"
+         [cdkDropListData]="startMemos" (cdkDropListDropped)="drop($event)"
+         class="col myList">
 
         <label style="background-color: #ffc93c">Start</label>
 
@@ -25,7 +32,9 @@
 
     </div>
 
-    <div cdkDropList #activeList="cdkDropList" [cdkDropListConnectedTo]="[startList,finishedList]" [cdkDropListData]="activeMemos" (cdkDropListDropped)="drop($event)" class="col myList">
+    <div cdkDropList #activeList="cdkDropList" [cdkDropListConnectedTo]="[startList,finishedList]"
+         [cdkDropListData]="activeMemos" (cdkDropListDropped)="drop($event)"
+         class="col myList">
 
       <label style="background-color: #ff9a3c">Active</label>
 
@@ -38,7 +47,9 @@
       </app-memo-list>
     </div>
 
-    <div cdkDropList #finishedList="cdkDropList" [cdkDropListConnectedTo]="[startList,activeList]" [cdkDropListData]="finishedMemos" (cdkDropListDropped)="drop($event)" class="col myList">
+    <div cdkDropList #finishedList="cdkDropList" [cdkDropListConnectedTo]="[startList,activeList]"
+         [cdkDropListData]="finishedMemos" (cdkDropListDropped)="drop($event)"
+         class="col myList">
 
       <label style="background-color: #ff6f3c">Finished</label>
 
