@@ -1,4 +1,5 @@
-<button [hidden]="this.offcanvasService.hasOpenOffcanvas()" title="Memoboard info" class="infoBox" cdkDrag cdkDragBoundary=".windowBoundary">
+<button cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="this.offcanvasService.hasOpenOffcanvas()"
+        class="infoBox" ngbTooltip="Memoboard info." placement="right">
   <i class="bi bi-info-square overButton" style="cursor: pointer" (click)="openInfobox(infoBox)"></i>
 </button>
 
@@ -12,7 +13,8 @@
   <div class="offcanvas-body text-bg-dark">
 
     <div style="display: flex; justify-content: center; margin-bottom: 10%">
-      <label class="connected" [innerHTML]="conStatus" [style]="conColor" title="connection state to SignalR"></label>
+      <label class="connected" [innerHTML]="conStatus" [style]="conColor"
+             ngbTooltip="connection state to SignalR" placement="bottom"></label>
     </div>
 
     <h4>Active users</h4>
@@ -20,12 +22,12 @@
 
     <div *ngFor="let user of userList;" style="font-size: 20px; display: flex; justify-content: left">
       <i class="bi bi-person-circle" style="margin-right: 2%"></i><span></span>
-      <p [title]="user['key']" [innerHTML]="user['value']" ></p>
+      <p [ngbTooltip]="user['key']" placement="right" [innerHTML]="user['value']" ></p>
     </div>
 
     <div class="text-nowrap" style="display: flex; justify-content: center; position: absolute; bottom: 0; font-size: 12px;">
       <p style="margin-right: 10%; margin-left: 5%">
-        version 0.3.7
+        version 0.3.8
       </p>
       <p>
         &copy; developed and designed by Michael Samula

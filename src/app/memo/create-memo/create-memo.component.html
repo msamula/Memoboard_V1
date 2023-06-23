@@ -5,7 +5,8 @@
   </div>
 
   <div class="input-group flex-nowrap mb-3">
-    <textarea rows="3" type="text" class="form-control" placeholder="Message" [disabled]="messageDisabled"  [(ngModel)]="message" (mousedown)="$event.stopPropagation()"></textarea>
+    <textarea type="text" class="form-control" placeholder="Message"  style="resize: both" rows="3"
+              [disabled]="messageDisabled"  [(ngModel)]="message" (mousedown)="$event.stopPropagation()"></textarea>
   </div>
 
   <div class="btn-group" role="group">
