@@ -20,9 +20,14 @@
     <h4>Active users</h4>
     <hr/>
 
-    <div *ngFor="let user of userList;" style="font-size: 20px; display: flex; justify-content: left">
+    <div class="itsMe">
       <i class="bi bi-person-circle" style="margin-right: 2%"></i><span></span>
-      <p [ngbTooltip]="user['key']" placement="right" [innerHTML]="user['value']" ></p>
+      <p [innerHTML]="loggedUser"></p>
+    </div>
+
+    <div *ngFor="let user of userList;" style="font-size: 20px; display: flex; justify-content: left">
+      <i *ngIf="user['value'] != loggedUser" class="bi bi-person-circle" style="margin-right: 2%"></i><span></span>
+      <p [ngbTooltip]="user['key']" placement="right" [innerHTML]="user['value']" *ngIf="user['value'] != loggedUser"></p>
     </div>
 
     <div class="text-nowrap" style="display: flex; justify-content: center; position: absolute; bottom: 0; font-size: 12px;">

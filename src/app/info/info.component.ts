@@ -17,6 +17,8 @@ export class InfoComponent implements OnInit{
 
     @Input()
     userList!: [];
+    @Input()
+    loggedUser!: string;
 
     constructor(public offcanvasService: NgbOffcanvas, private signalService: SignalService) {
       this.hideButton = false;

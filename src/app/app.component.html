@@ -2,7 +2,7 @@
 
 <div *ngIf="usernameIsSet" class="container windowBoundary">
 
-  <app-info [userList]="userList"></app-info>
+  <app-info [userList]="userList" [loggedUser]="loggedUser"></app-info>
 
   <button title="create a new memo" class="addMemoButton"
           cdkDrag cdkDragBoundary=".windowBoundary" [hidden]="showBtn">
