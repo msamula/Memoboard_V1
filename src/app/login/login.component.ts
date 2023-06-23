@@ -58,9 +58,12 @@ export class LoginComponent {
   animateAlert: boolean;
 
   /*Register new user*/
-  createUser: boolean;
-  confirmCreate: boolean;
+  showRegistration: boolean;
+  registerButtonDisabled: boolean;
   userCreatedInfo: boolean;
+
+  /*Password checker regular expressions*/
+  passwordChecker: RegExp;
 
   /*Login button*/
   disableSubmit: boolean;
@@ -72,29 +75,30 @@ export class LoginComponent {
 
 
   get username(): string {
-    (this._password.trim().length < 4 || this._username.trim().length < 3) ? this.disableSubmit = true : this.disableSubmit = false;
+    (this.passwordChecker.test(this._password) && this._username.trim().length >= 3) ? this.disableSubmit = false : this.disableSubmit = true;
     return this._username;
   }
 
   set username(value: string) {
     this._username = value.trim();
+    this.PasswordChecker(this._username, this._password);
   }
   get password(): string {
-    (this._password.trim().length < 4 || this._username.trim().length < 3) ? this.disableSubmit = true : this.disableSubmit = false;
     return this._password;
   }
 
   set password(value: string) {
     this._password = value;
+    this.PasswordChecker(this._username, this._password);
   }
 
   get confirmPassword(): string {
-    (this._password.trim().length < 4 || this._username.trim().length < 3 || this._password !== this._confirmPassword) ? this.confirmCreate = true : this.confirmCreate = false;
     return this._confirmPassword;
   }
 
   set confirmPassword(value: string) {
     this._confirmPassword = value;
+    this.PasswordChecker(this._username, this._confirmPassword);
   }
 
   /*Input fields END*/
@@ -110,11 +114,18 @@ export class LoginComponent {
     this.animateAlert = false;
     this.alertMessage = "";
 
-    this.createUser = false;
-    this.confirmCreate = true;
+    this.showRegistration = false;
+    this.registerButtonDisabled = true;
     this.userCreatedInfo = false;
 
-    this.disableSubmit = false;
+    this.disableSubmit = true;
+
+    // password has at least one lowercase letter (?=.*[a-z])
+    // password has at least one uppercase letter (?=.*[A-Z])
+    // password has at least one digit (?=.*[0-9])
+    // password has at least one special character (?=.*[^A-Za-z0-9])
+    // password is at least eight characters long(?=.{8,})
+    this.passwordChecker = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
   }
 
   VerifyUser(thisForm: NgForm) {
@@ -175,7 +186,7 @@ export class LoginComponent {
   }
 
   ShowOrHideRegistration() {
-    this.createUser = !this.createUser;
+    this.showRegistration = !this.showRegistration;
     this.windowTitle == `<i class="bi bi-person-circle"></i> Sign up`
       ? this.windowTitle = `<i class="bi bi-person-circle"></i> Sign in`
       : this.windowTitle = `<i class="bi bi-person-circle"></i> Sign up`;
@@ -193,8 +204,18 @@ export class LoginComponent {
   }
 
   ClearInput(){
-    this.username = '';
-    this.password = '';
-    this.confirmPassword = '';
+    this._username = '';
+    this._password = '';
+    this._confirmPassword = '';
+  }
+
+  PasswordChecker(username: string ,password: string) {
+
+    if(this.passwordChecker.test(password) && (this._password === this._confirmPassword) && username.length >= 3) {
+      this.registerButtonDisabled = false;
+    }
+    if(!this.passwordChecker.test(password) || (this._password !== this._confirmPassword) || username.length < 3) {
+      this.registerButtonDisabled = true;
+    }
   }
 }

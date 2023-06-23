@@ -13,27 +13,27 @@
 
     <label class="title" [innerHTML]="windowTitle"></label>
 
-    <input *ngIf="!createUser" [(ngModel)]="username" name="userName" type="text"     class="form-control"  placeholder="username">
-    <input *ngIf="!createUser" [(ngModel)]="password" name="password" type="password" class="form-control"  placeholder="password">
+    <input *ngIf="!showRegistration" [(ngModel)]="username" name="userName" type="text" class="form-control" placeholder="username">
+    <input *ngIf="!showRegistration" [(ngModel)]="password" name="password" type="password" class="form-control" placeholder="password">
 
     <input ngbTooltip="Your username must be 3 characters long." placement="left"
-           *ngIf="createUser" [(ngModel)]="username" name="userName"
-           type="text"     class="form-control"  placeholder="enter username">
+           *ngIf="showRegistration" [(ngModel)]="username" name="userName"
+           type="text" class="form-control" placeholder="enter username">
 
-    <input ngbTooltip="Your password must be 4 characters long." placement="left"
-           *ngIf="createUser" [(ngModel)]="password" name="password"
-           type="password" class="form-control"  placeholder="enter password">
+    <input ngbTooltip="Your password must be 8 characters long, must have a lowercase and an uppercase letter, one digit and one special character." placement="left"
+           *ngIf="showRegistration" [(ngModel)]="password" name="password"
+           type="password" class="form-control" placeholder="enter password">
 
-    <input *ngIf="createUser" [(ngModel)]="confirmPassword" name="confirmPassword"
-           type="password" class="form-control"  placeholder="confirm password">
+    <input *ngIf="showRegistration" [(ngModel)]="confirmPassword" name="confirmPassword"
+           type="password" class="form-control" placeholder="confirm password">
 
     <div class="btn-group centerButtons" role="group">
-      <button *ngIf="!createUser" type="button" (click)="ShowOrHideRegistration()"
+      <button *ngIf="!showRegistration" type="button" (click)="ShowOrHideRegistration()"
               ngbTooltip="Create a new user." placement="left"
               class="btn btn-sm btn-warning"><i class="bi bi-person-add"></i></button>
-      <button *ngIf="!createUser" [disabled]="disableSubmit" type="submit"  class="btn btn-sm btn-success"><i class="bi bi-check-square"></i></button>
-      <button *ngIf="createUser" type="button" (click)="ShowOrHideRegistration()" class="btn btn-sm btn-danger"><i class="bi bi-x-square"></i></button>
-      <button *ngIf="createUser" type="button" [disabled]="confirmCreate" (click)="RegisterUser(thisForm)" class="btn btn-sm btn-success"><i class="bi bi-check-square"></i></button>
+      <button *ngIf="!showRegistration" [disabled]="disableSubmit" type="submit" class="btn btn-sm btn-success"><i class="bi bi-check-square"></i></button>
+      <button *ngIf="showRegistration" type="button" (click)="ShowOrHideRegistration()" class="btn btn-sm btn-danger"><i class="bi bi-x-square"></i></button>
+      <button *ngIf="showRegistration" type="button" [disabled]="registerButtonDisabled" (click)="RegisterUser(thisForm)" class="btn btn-sm btn-success"><i class="bi bi-check-square"></i></button>
     </div>
   </form>
 </div>
