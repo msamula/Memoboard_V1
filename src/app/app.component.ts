@@ -53,34 +53,8 @@ export class AppComponent implements OnInit{
   // before the actual page load -> lifecycle method of angular
   // after the constructor
   ngOnInit(): void{
-
-    // "UpdateMemoboard" -> "key" from signalR API
-    this.signalService.connection.on("UpdateMemoboard",() => {
-      this.GetAllMemos();
-    });
-
-    this.signalService.connection.on("UserListArray",(userList: []) => {
-      this.userList = userList;
-    });
-
-    let awaitLoginInterval = setInterval(async ()=>{
-
-      this.usernameIsSet = this.sharedService.usernameIsSet;
-
-      if(this.usernameIsSet){
-
-        clearInterval(awaitLoginInterval);
-
-        this.loggedUser = this.sharedService.GetUsername();
-
-        this.signalService.connection.send("AddUserToList", this.loggedUser);
-
-        //set the height of the boundary
-        SetBoundarySize();
-
-        this.GetAllMemos();
-      }
-    },500);
+    this.ConfigureSignalR();
+    this.AwaitLogin();
   }
 
   //API http data request
@@ -112,6 +86,40 @@ export class AppComponent implements OnInit{
   SwitchBtnCreateMemo() {
     this.showCreateMemo = !this.showCreateMemo;
     this.showBtn = !this.showBtn;
+  }
+
+  AwaitLogin(){
+    let awaitLoginInterval = setInterval(async ()=>{
+
+      this.usernameIsSet = this.sharedService.usernameIsSet;
+
+      if(this.usernameIsSet){
+
+        clearInterval(awaitLoginInterval);
+
+        // get the username from login.component
+        this.loggedUser = this.sharedService.GetUsername();
+
+        // add user to active users list
+        this.signalService.connection.send("AddUserToList", this.loggedUser);
+
+        //set the height of the boundary
+        SetBoundarySize();
+
+        this.GetAllMemos();
+      }
+    },500);
+  }
+
+  ConfigureSignalR(){
+    // "UpdateMemoboard" -> "key" from signalR API
+    this.signalService.connection.on("UpdateMemoboard",() => {
+      this.GetAllMemos();
+    });
+
+    this.signalService.connection.on("UserListArray",(userList: []) => {
+      this.userList = userList;
+    });
   }
 
   drop(event: CdkDragDrop<DisplayedMemo[]>) {
