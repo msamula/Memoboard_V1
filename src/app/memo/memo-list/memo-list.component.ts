@@ -4,6 +4,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 
 //user imports
 import {DisplayedMemo} from "../../models/models";
+import { checkText } from 'smile2emoji';
 
 //Decorator
 @Component({
@@ -128,5 +129,9 @@ export class MemoListComponent implements OnInit{
       this.inputMemo.isNew = false;
     }
     this.iSaw = !this.iSaw;
+  }
+
+  emojifyText(message: string): string {
+    return checkText(message);
   }
 }

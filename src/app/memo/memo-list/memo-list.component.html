@@ -7,7 +7,7 @@
     {{inputMemo.user.userName}}
   </div>
   <div class="card-body">
-    <p *ngIf="!createNewMessage" class="card-text">{{inputMemo.message}}</p>
+    <p *ngIf="!createNewMessage" class="card-text">{{emojifyText(inputMemo.message)}}</p>
 
     <input *ngIf="createNewMessage" type="text" class="form-control" [(ngModel)]="newMessageInput" (mousedown)="$event.stopPropagation()">
 
