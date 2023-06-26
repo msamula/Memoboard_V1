@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 
 const _url = 'https://localhost:7296/api';
-//const _url = 'http://192.168.178.119:8099/api';
+//const _url = 'http://192.168.178.119/api';
 
 @Injectable({
   providedIn: 'root'
