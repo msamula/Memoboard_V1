@@ -1,4 +1,4 @@
-import {DisplayedMemo, Memo} from "../models/models";
+import {DisplayedMemo, Memo, Token} from "../models/models";
 
 export function SetBoundarySize() {
   let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
@@ -75,4 +75,14 @@ export function SortMemosToLists(memoLists: DisplayedMemo[][], incomingMemos: Di
   }
 
   return [tempList[0],tempList[1],tempList[2]];
+}
+
+export async function RefreshToken(token: Token){
+  setInterval(()=>{
+    let expireTime = (token.exp*1000 - new Date().getTime())/1000;
+    if(expireTime <= 15){
+      window.alert('Your session expired. Please sign in again.');
+      window.location.reload();
+    }
+  },10000);
 }

@@ -12,3 +12,9 @@ export interface DisplayedMemo extends Memo{
   isDifferent: boolean,
   isNew: boolean
 }
+
+export interface Token{
+  username: string,
+  projectname: string,
+  exp: number
+};

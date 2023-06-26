@@ -4,6 +4,9 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 import {HttpMemoService} from "../services/http-memo.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SharedService} from "../services/shared.service";
+import jwt_decode from "jwt-decode";
+import {Token} from "../models/models";
+import {RefreshToken} from "../helper/helperFunctions";
 
 
 @Component({
@@ -132,6 +135,10 @@ export class LoginComponent {
     this.httpMemoService.VerifyUser(thisForm.value).subscribe(
 
       (data:any)=>{
+
+              let token: Token = jwt_decode(data.body);
+              RefreshToken(token);
+
               this.httpMemoService.SetTokenHeader(data.body);
               this.sharedService.SetUsername(this._username);
               this.CloseLogin();
