@@ -1,3 +1,5 @@
+<app-emoji [hidden]="showEmojis" (emojiEvent)="AddEmoji($event)"></app-emoji>
+
 <div class="container text-center" style="margin-top: 30px">
 
   <div class="input-group flex-nowrap mb-3">
@@ -9,6 +11,7 @@
               [disabled]="messageDisabled"  [(ngModel)]="message" (mousedown)="$event.stopPropagation()"></textarea>
   </div>
 
+  <button title="emojis" class="btn mb-3" (click)="showEmojiWindow()"><i class="bi bi-emoji-smile emojieBtn"></i></button>
   <div class="btn-group" role="group">
     <button title="close window" class="btn btn-danger mb-3"  (click)="OnCancel()"><i class="bi bi-x-square"></i></button>
     <button title="create memo" class="btn btn-success mb-3" (click)="BtnCreateMemo()" [disabled]="btnDisabled"><i class="bi bi-check2-square"></i></button>

@@ -78,11 +78,16 @@ export function SortMemosToLists(memoLists: DisplayedMemo[][], incomingMemos: Di
 }
 
 export async function RefreshToken(token: Token){
-  setInterval(()=>{
+  const myInterval = setInterval(()=>{
     let expireTime = (token.exp*1000 - new Date().getTime())/1000;
     if(expireTime <= 15){
+      clearInterval(myInterval);
       window.alert('Your session expired. Please sign in again.');
       window.location.reload();
     }
   },10000);
+}
+
+export function Sleep(milliseconds: number): any {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
 }

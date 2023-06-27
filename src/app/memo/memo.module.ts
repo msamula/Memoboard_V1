@@ -6,6 +6,7 @@ import {CdkDrag} from "@angular/cdk/drag-drop";
 
 import { MemoListComponent } from './memo-list/memo-list.component';
 import { CreateMemoComponent } from './create-memo/create-memo.component';
+import {EmojiComponent} from "./emoji/emoji.component";
 
 
 // module has no logic inside
@@ -15,7 +16,8 @@ import { CreateMemoComponent } from './create-memo/create-memo.component';
 
   declarations: [
     MemoListComponent,
-    CreateMemoComponent
+    CreateMemoComponent,
+    EmojiComponent
   ],
 
   imports: [
@@ -33,7 +35,8 @@ import { CreateMemoComponent } from './create-memo/create-memo.component';
   //create grid-tag <app-memo> in app.component.html
   exports: [
     MemoListComponent,
-    CreateMemoComponent
+    CreateMemoComponent,
+    EmojiComponent
   ]
 
 })

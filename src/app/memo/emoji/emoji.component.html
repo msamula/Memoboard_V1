@@ -1,0 +1,8 @@
+<div class="emojiWindow">
+  <button
+    *ngFor="let emoji of emojiStringArray;"
+    [innerHTML]="emoji" (click)="ClickEmoji(emoji)"
+    class="btn btn-sm emojiBtn" >
+  </button>
+</div>
+

@@ -37,12 +37,13 @@ export class CreateMemoComponent implements OnInit{
     this._message = value;
   }
 
+  showEmojis: boolean;
   btnDisabled: boolean;
   usernameDisabled: boolean;
   messageDisabled: boolean;
 
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService, private sharedService: SharedService) {
-
+    this.showEmojis = true;
     this.btnDisabled = true;
     this.usernameDisabled = true;
     this.messageDisabled = false;
@@ -88,5 +89,13 @@ export class CreateMemoComponent implements OnInit{
     {
       window.alert('Something went wrong while creating a new memo.');
     }
+  }
+
+  showEmojiWindow() {
+    this.showEmojis = !this.showEmojis;
+  }
+
+  AddEmoji(emoji: string) {
+    this._message += emoji;
   }
 }

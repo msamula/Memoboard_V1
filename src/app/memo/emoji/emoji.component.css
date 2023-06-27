@@ -1,0 +1,56 @@
+.emojiWindow{
+  background-color: var(--sixthColor) ;
+  width: 85px;
+  height: 100%;
+  position: absolute;
+  top: 0%;
+  left: 100.5%;
+  overflow-y:auto;
+  border-radius: 25px;
+  cursor: auto;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
+}
+
+.emojiBtn:active{
+  border-color: var(--fourthColor);
+}
+
+                                        /*Scrollbar*/
+
+/* width */
+::-webkit-scrollbar {
+  display: block;
+  width: 10px;
+}
+
+/* Track - Schiene */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+/* Handle Balken*/
+::-webkit-scrollbar-thumb {
+  border-right: none;
+  border-left: none;
+  background: var(--fourthColor);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondColor);
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 15px;
+}
+
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 15px;
+}
+
+
+
