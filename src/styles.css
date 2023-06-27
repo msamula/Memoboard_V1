@@ -11,6 +11,11 @@
   --secondColorRgb: rgb(255, 111, 60);
 }
 
+/* unvisited link */
+a:link {
+  color: var(--sixthColor);
+}
+
 body{
   font-family: sans-serif;
   background-color: var(--firstColor);

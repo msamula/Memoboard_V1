@@ -57,6 +57,7 @@ export class CreateMemoComponent implements OnInit{
   cancel: EventEmitter<any> = new EventEmitter();
 
   OnCancel(){
+    this.showEmojis = true;
     this.cancel.emit();
   }
 
