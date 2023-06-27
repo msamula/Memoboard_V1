@@ -1,5 +1,5 @@
 .emojiWindow{
-  background-color: var(--sixthColor) ;
+  background-color: var(--fourthColor);
   width: 85px;
   height: 100%;
   position: absolute;
@@ -11,8 +11,12 @@
   box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.6);
 }
 
+.emojiBtn{
+  width: 37px;
+}
+
 .emojiBtn:active{
-  border-color: var(--fourthColor);
+  border-color: var(--sixthColor);
 }
 
                                         /*Scrollbar*/
@@ -33,7 +37,7 @@
 ::-webkit-scrollbar-thumb {
   border-right: none;
   border-left: none;
-  background: var(--fourthColor);
+  background: var(--sixthColor);
   border-radius: 10px;
 }
 

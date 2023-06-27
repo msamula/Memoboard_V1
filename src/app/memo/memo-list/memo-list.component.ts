@@ -131,7 +131,22 @@ export class MemoListComponent implements OnInit{
     this.iSaw = !this.iSaw;
   }
 
-  emojifyText(message: string): string {
+  ModifyMessage(message: string){
+      let emojiMessage = this.EmojifyText(message);
+      return this.UrlifyText(emojiMessage);
+  }
+
+  EmojifyText(message: string): string {
     return checkText(message);
+  }
+
+  UrlifyText(message: string) {
+
+    let urlRegex = /(\b((https?|ftp|file):\/\/)?(www\.)?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+
+    return message.replace(urlRegex, (match, url) => {
+      let protocol = url.startsWith('http') ? '' : 'http://';
+      return `<a target=”_blank” href="${protocol}${url}">${url}</a>`;
+    });
   }
 }

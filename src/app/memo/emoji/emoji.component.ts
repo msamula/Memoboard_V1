@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { checkText, emojiMap } from 'smile2emoji';
 
 @Component({
@@ -6,7 +6,7 @@ import { checkText, emojiMap } from 'smile2emoji';
   templateUrl: './emoji.component.html',
   styleUrls: ['./emoji.component.css']
 })
-export class EmojiComponent{
+export class EmojiComponent implements OnInit{
 
   emojiStringArray: string[];
 
@@ -16,7 +16,15 @@ export class EmojiComponent{
   constructor() {
 
     this.emojiStringArray = [];
+  }
 
+  ngOnInit(): void {
+
+    this.CreateEmojis();
+  }
+
+  async CreateEmojis()
+  {
     for (const emojiMapKey in emojiMap) {
       this.emojiStringArray.push(checkText(emojiMapKey));
     }
@@ -25,4 +33,6 @@ export class EmojiComponent{
   ClickEmoji(emoji:string){
     this.emojiEvent.emit(emoji);
   }
+
+
 }
