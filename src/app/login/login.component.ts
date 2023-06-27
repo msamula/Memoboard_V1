@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgForm} from "@angular/forms";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {HttpMemoService} from "../services/http-memo.service";
@@ -6,7 +6,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {SharedService} from "../services/shared.service";
 import jwt_decode from "jwt-decode";
 import {Token} from "../models/models";
-import {RefreshToken} from "../helper/helperFunctions";
+import {GetWindowSize, RefreshToken} from "../helper/helperFunctions";
+import anime from 'animejs/lib/anime.es.js';
 
 
 @Component({
@@ -45,7 +46,7 @@ import {RefreshToken} from "../helper/helperFunctions";
     ])
   ]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
   /*shows 'Sign up' or 'Sign in'*/
   windowTitle: string;
@@ -129,6 +130,10 @@ export class LoginComponent {
     // password has at least one special character (?=.*[^A-Za-z0-9])
     // password is at least eight characters long(?=.{8,})
     this.passwordChecker = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+  }
+
+  ngOnInit(): void {
+    this.LogoAnimation();
   }
 
   VerifyUser(thisForm: NgForm) {
@@ -252,4 +257,104 @@ export class LoginComponent {
     }
   }
 
+  LogoAnimation(){
+    let windowSize: number[];
+    windowSize = GetWindowSize();
+
+    let scaleValue = 0.5;
+    let translateHorizontal = windowSize[0]/8.5;
+    let translateVertical = windowSize[1];
+    let durationTime = 550;
+    let secondAnimationDelay = 5500;
+
+    anime({
+      targets: '#icon1',
+      translateX: translateHorizontal,
+      translateY: translateVertical*0.01,
+      scale: scaleValue,
+      easing: 'linear',
+      duration: durationTime+150
+    });
+
+    anime({
+      targets: '#icon2',
+      translateX: translateHorizontal*1.1,
+      translateY: translateVertical*0.2,
+      scale: scaleValue,
+      easing: 'linear',
+      duration: durationTime+100
+    });
+
+    anime({
+      targets: '#icon3',
+      translateX: translateHorizontal*1.5,
+      translateY: translateVertical*0.4,
+      scale: scaleValue,
+      easing: 'linear',
+      duration: durationTime+50
+    });
+
+    anime({
+      targets: '#icon4',
+      translateX: translateHorizontal*2,
+      translateY: translateVertical*0.55,
+      scale: scaleValue,
+      easing: 'linear',
+      duration: durationTime
+    });
+
+    anime({
+      targets: '#icon5',
+      translateX: translateHorizontal*2.7,
+      translateY: translateVertical*0.66,
+      scale: scaleValue,
+      easing: 'linear',
+      duration: durationTime-50
+    });
+
+
+    setTimeout(async ()=>{
+      anime({
+        targets: '#icon4',
+        translateX: -800,
+        easing: 'linear',
+        duration: durationTime
+      });
+    },secondAnimationDelay)
+
+    setTimeout(async ()=>{
+      anime({
+        targets: '#icon3',
+        translateX: 4000,
+        easing: 'linear',
+        duration: durationTime
+      });
+    },secondAnimationDelay+100)
+
+    setTimeout(async ()=>{
+      anime({
+        targets: '#icon5',
+        translateY: 1000,
+        easing: 'linear',
+        duration: durationTime
+      });
+    },secondAnimationDelay+100)
+
+    setTimeout(async ()=>{
+      anime({
+        targets: '#icon1',
+        translateY: -1000,
+        easing: 'linear',
+        duration: durationTime*2
+      });
+
+      anime({
+        targets: '#icon2',
+        translateY: 4000,
+        easing: 'linear',
+        duration: durationTime*2
+      });
+
+    },secondAnimationDelay+300)
+  }
 }

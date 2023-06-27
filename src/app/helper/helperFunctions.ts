@@ -1,5 +1,12 @@
 import {DisplayedMemo, Memo, Token} from "../models/models";
 
+export function GetWindowSize(): number[] {
+  let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+  let height = (window.innerHeight > 0) ? window.innerHeight : screen.height;
+
+  return [width, height];
+}
+
 export function SetBoundarySize() {
   let width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
   let height = (window.innerHeight > 0) ? window.innerHeight : screen.height;

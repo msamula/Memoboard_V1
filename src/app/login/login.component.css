@@ -7,6 +7,9 @@
 
   background-color: var(--secondColor);
   z-index: 9999;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .login{
@@ -53,4 +56,49 @@ input{
   margin-top: 4%;
   display: flex;
   justify-content: center;
+}
+
+#icon1{
+  position: absolute;
+  left: -20%;
+  width: 50%;
+  height: 80%;
+  background-image: url("../../assets/typescript_logo.png");
+  background-repeat: no-repeat;
+}
+
+#icon2{
+  position: absolute;
+  left: -20%;
+  width: 50%;
+  height: 50%;
+  background-image: url("../../assets/angular_logo.png");
+  background-repeat: no-repeat;
+}
+
+#icon3{
+  position: absolute;
+  left: -20%;
+  width: 50%;
+  height: 50%;
+  background-image: url("../../assets/cSharp_logo.png");
+  background-repeat: no-repeat;
+}
+
+#icon4{
+  position: absolute;
+  left: -20%;
+  width: 50%;
+  height: 50%;
+  background-image: url("../../assets/aspNet_logo.png");
+  background-repeat: no-repeat;
+}
+
+#icon5{
+  position: absolute;
+  left: -20%;
+  width: 50%;
+  height: 50%;
+  background-image: url("../../assets/sql_logo.png");
+  background-repeat: no-repeat;
 }
