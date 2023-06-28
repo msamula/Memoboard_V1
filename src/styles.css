@@ -13,7 +13,11 @@
 
 /* unvisited link */
 a:link {
-  color: var(--sixthColor);
+  color: var(--firstColor);
+}
+
+a:visited{
+  color: var(--secondColor);
 }
 
 body{

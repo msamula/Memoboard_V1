@@ -119,34 +119,35 @@ export class MemoListComponent implements OnInit{
       }
     }
 
-  iSawMemo() {
-    if(this.inputMemo.isDifferent){
-      this.memoChanged = !this.memoChanged;
-      this.inputMemo.isDifferent = false;
+    iSawMemo() {
+      if(this.inputMemo.isDifferent){
+        this.memoChanged = !this.memoChanged;
+        this.inputMemo.isDifferent = false;
+      }
+      if(this.inputMemo.isNew){
+        this.memoNew = !this.memoNew;
+        this.inputMemo.isNew = false;
+      }
+      this.iSaw = !this.iSaw;
     }
-    if(this.inputMemo.isNew){
-      this.memoNew = !this.memoNew;
-      this.inputMemo.isNew = false;
+
+    ModifyMessage(message: string){
+        let emojiMessage = this.EmojifyText(message);
+        return this.Linkify(emojiMessage);
     }
-    this.iSaw = !this.iSaw;
-  }
 
-  ModifyMessage(message: string){
-      let emojiMessage = this.EmojifyText(message);
-      return this.UrlifyText(emojiMessage);
-  }
+    EmojifyText(message: string): string {
+      return checkText(message);
+    }
 
-  EmojifyText(message: string): string {
-    return checkText(message);
-  }
-
-  UrlifyText(message: string) {
-
-    let urlRegex = /(\b((https?|ftp|file):\/\/)?(www\.)?[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-
-    return message.replace(urlRegex, (match, url) => {
-      let protocol = url.startsWith('http') ? '' : 'http://';
-      return `<a target=”_blank” href="${protocol}${url}">${url}</a>`;
+   Linkify(message: string): string {
+    const urlRegex = /((https?:\/\/|www\.|)\S+\.[a-z]{2,})/gi;
+    return message.replace(urlRegex, (url) => {
+      let hyperlink = url;
+      if (!hyperlink.match('^https?://')) {
+        hyperlink = 'http://' + hyperlink;
+      }
+      return `<a target=”_blank” href="${hyperlink}">${url}</a>`;
     });
   }
 }
