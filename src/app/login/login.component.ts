@@ -257,7 +257,7 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  LogoAnimation(){
+  async LogoAnimation(){
     let windowSize: number[];
     windowSize = GetWindowSize();
 
