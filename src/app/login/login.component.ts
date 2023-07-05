@@ -334,7 +334,7 @@ export class LoginComponent implements OnInit{
     setTimeout(async ()=>{
       anime({
         targets: '#icon5',
-        translateY: 1000,
+        translateY: 5000,
         easing: 'linear',
         duration: durationTime
       });
