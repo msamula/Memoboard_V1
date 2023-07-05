@@ -12,23 +12,11 @@ import {SharedService} from "../../services/shared.service";
 
 export class CreateMemoComponent implements OnInit{
 
-  private _username: string = '';
   private _message: string = '';
-
-  get username(): string {
-
-    (this._message.trim().length < 1 || this._username.trim().length < 1) ? this.btnDisabled = true : this.btnDisabled = false;
-
-    return this._username;
-  }
-
-  set username(value: string) {
-    this._username = value;
-  }
 
   get message(): string {
 
-    (this._message.trim().length < 1 || this._username.trim().length < 1) ? this.btnDisabled = true : this.btnDisabled = false;
+    (this._message.trim().length < 1) ? this.btnDisabled = true : this.btnDisabled = false;
 
     return this._message;
   }
@@ -37,12 +25,14 @@ export class CreateMemoComponent implements OnInit{
     this._message = value;
   }
 
+  username: string;
   showEmojis: boolean;
   btnDisabled: boolean;
   usernameDisabled: boolean;
   messageDisabled: boolean;
 
   constructor(private httpMemoService: HttpMemoService, private signalService: SignalService, private sharedService: SharedService) {
+    this.username = '';
     this.showEmojis = true;
     this.btnDisabled = true;
     this.usernameDisabled = true;
@@ -50,7 +40,7 @@ export class CreateMemoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this._username = this.sharedService.GetUsername();
+    this.username = this.sharedService.GetUsername();
   }
 
   @Output()
@@ -62,12 +52,11 @@ export class CreateMemoComponent implements OnInit{
   }
 
   async BtnCreateMemo() {
-    this._username = this._username.trim();
     this._message = this._message.trim();
 
     try
     {
-      this.httpMemoService.CreateMemo(this._username, this._message).subscribe(
+      this.httpMemoService.CreateMemo(this._message).subscribe(
         ()=>{},
         (e: HttpErrorResponse) => {
           if(e.status === 429){

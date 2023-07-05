@@ -32,8 +32,8 @@ export class HttpMemoService {
     return this.http.get<Memo[]>(`${_url}/Memo/GetAllMemos`,{headers: this.tokenHeader});
   }
 
-  CreateMemo(username: string, message: string): Observable<any>{
-    return this.http.post(`${_url}/Memo/CreateMemo?userName=${username}&memoMessage=${message}`,null,{headers: this.tokenHeader,observe: "response"});
+  CreateMemo(message: string): Observable<any>{
+    return this.http.post(`${_url}/Memo/CreateMemo`,`"${message}"`,{headers: this.tokenHeader,observe: "response"});
   }
 
   ChangeMemoMessage(memoID: number, newMessage: string): Observable<any>{
@@ -47,6 +47,7 @@ export class HttpMemoService {
   SetTokenHeader(token: string)
   {
     this.tokenHeader = this.tokenHeader.set('Authorization', `Bearer ${token}`);
+    this.tokenHeader = this.tokenHeader.set('Content-Type', 'application/json');
   }
 }
 
