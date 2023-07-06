@@ -67,9 +67,22 @@
 }
 
 label{
-  font-size: larger;
   display: block;
+  position: sticky;
+  top:0;
+  height: 40px;
+  padding-top: 7px;
+  margin: 0 -0.75rem 25px -0.75rem;
+  z-index: 5;
+  font-size: larger;
+
   border-radius: 25px;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius:  0 !important;
+
+  -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.6);
+  -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.6);
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.6);
 }
 
 .myList {
@@ -95,7 +108,7 @@ label{
     box-shadow: 0 0 0 0 rgba(21, 82, 99, 0);
   }
 }
-
+/*  --- Hide scrollbar ---  */
 /* width */
 ::-webkit-scrollbar {
   visibility: hidden;
@@ -115,6 +128,17 @@ label{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   visibility: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.myList[_ngcontent-ng-c4294156452]::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.myList[_ngcontent-ng-c4294156452] {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @media screen and (max-width: 1000px) {
